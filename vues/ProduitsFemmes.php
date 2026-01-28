@@ -6,20 +6,33 @@ ob_start()
 // require "model/produit.php";
 ?>
 <!-- Cartes Bootstraps pour afficher les articles -->
- <?php
- foreach($produitFemmes as $p){
-    ?>
-<div class="card" style="width: 18rem;">
-    <img src="assets/img/produits/femmes/<?= htmlspecialchars($p->getImage()) ?>" class="card-img-top" alt="<?= htmlspecialchars($p->getNomProduit()) ?>">
-    <div class="card-body">
-        <h5 class="card-title"><?= $p->getNomProduit() ?></h5>
-        <p class="card-text"><?= $p->getTypeVetement() ?></p>
-        <a href="#" class="btn btn-primary">Voir Plus</a>
+<div class="container mt-4">
+    <div class="row">
+
+        <?php foreach ($produitFemmes as $p) : ?>
+            <div class="col-md-4 mb-4">
+                
+                <div class="card h-100">
+                    <img 
+                        src="assets/img/produits/femmes/<?= htmlspecialchars($p->getImage()) ?>" 
+                        class="card-img-top" 
+                        alt="<?= htmlspecialchars($p->getNomProduit()) ?>"
+                    >
+
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title"><?= htmlspecialchars($p->getNomProduit()) ?></h5>
+                        <p class="card-text"><?= htmlspecialchars($p->getTypeVetement()) ?></p>
+
+                        <a href="#" class="btn btn-primary mt-auto">Voir Plus</a>
+                    </div>
+                </div>
+
+            </div>
+        <?php endforeach; ?>
+
     </div>
 </div>
-<?php
-}
-?>
+
 
 
 <?php
