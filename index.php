@@ -6,6 +6,7 @@ session_start(); // emplacement obligatoire
 // Import des controllers
 require "controller/ctlUtilisateur.php";
 require "controller/ctlProduits.php";
+// require "controller/ctlPanier.php";
 
 // Contenu Page d'accueil
 function accueil() {
@@ -69,6 +70,15 @@ if (isset($_GET['action'])) {
                 case 'detail_produit';
                 ctlDetailProduit();
                 break;
+        // Panier
+            // Ajout Panier
+            case 'Produit_Ajout';
+            ctlAjouterPanier();
+            break;
+            // Affichage Panier
+            case 'Panier';
+            ctlAfficherPanier();
+            break;
         default:
             header("location: index.php?action=accueil");
             break;

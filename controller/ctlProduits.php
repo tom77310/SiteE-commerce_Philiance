@@ -28,3 +28,44 @@ function ctlDetailProduit() {
         header("loacation: index.php?action=accueil");
     }
 }
+
+function ctlAjouterPanier() {
+    if (isset($_GET['id'])) {
+        $id = (int) $_GET['id'];
+
+        if (!isset($_SESSION['panier'])) {
+            $_SESSION['panier'] = [];
+        }
+
+        if (isset($_SESSION['panier'][$id])) {
+            $_SESSION['panier'][$id]++;
+        } else {
+            $_SESSION['panier'][$id] = 1;
+        }
+
+
+        header("Location: index.php?action=detail_produit&id=" . $id);
+        exit();
+    }
+}
+function ctlAfficherPanier() {
+    $panier = $_SESSION['panier'] ?? [];
+
+    $produitsPanier = [];
+    $total = 0;
+
+    foreach ($panier as $id => $quantite) {
+        $produit = AvoirUnProduitParSonId($id);
+        if ($produit) {
+            $produitsPanier[] = [
+                'produit' => $produit,
+                'quantite' => $quantite
+            ];
+            $total += $produit->getPrix() * $quantite;
+        }
+    }
+
+    require "vues/panier.php";
+}
+
+?>

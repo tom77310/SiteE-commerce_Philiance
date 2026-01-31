@@ -43,7 +43,7 @@ $role = $isConnected ? $_SESSION['user']->getRole() : null;
         <!-- USER uniquement -->
         <?php if ($isConnected && $role === 'USER') : ?>
           <li class="nav-item position-relative">
-            <a class="nav-link" href="index.php?action=panier">
+            <a class="nav-link" href="index.php?action=Panier">
               Panier
               <?php if ($PanierQte > 0) : ?>
                 <span class="badge bg-danger"><?= $PanierQte ?></span>

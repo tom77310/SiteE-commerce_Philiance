@@ -46,6 +46,28 @@ ob_start();
         </div>
 
     </div>
+   <?php if (isset($_SESSION['user'])) : ?>
+
+    <?php if (
+        $_SESSION['user']->getRole() === 'USER' ||
+        $_SESSION['user']->getRole() === 'ADMIN'
+    ) : ?>
+
+        <a href="index.php?action=Produit_Ajout&id=<?= $produit->getId() ?>" class="btn btn-success mt-2">
+            Ajouter au panier
+        </a>
+
+
+    <?php endif; ?>
+
+<?php else : ?>
+
+    <a href="index.php?action=utilisateur_connexion" class="btn btn-warning mt-2">
+        Connectez-vous ou inscrivez-vous pour ajouter cet article au panier
+    </a>
+
+<?php endif; ?>
+
 </div>
 
 <?php
