@@ -1,17 +1,17 @@
 <?php
-$titre = "Site e-commerce 2022-2023 : Articles Femmes";
+$titre = "Site e-commerce 2022-2023 : Articles Hommes";
 ob_start()
 ?>
 <!-- Cartes Bootstraps pour afficher les articles -->
 <div class="container mt-4">
     <div class="row">
 
-        <?php foreach ($produitFemmes as $p) : ?>
+        <?php foreach ($produitHommes as $p) : ?>
             <div class="col-md-4 mb-4">
                 
                 <div class="card h-100">
                     <img 
-                        src="assets/img/produits/femmes/<?= htmlspecialchars($p->getImage()) ?>" 
+                        src="assets/img/produits/hommes/<?= htmlspecialchars($p->getImage()) ?>" 
                         class="card-img-top" 
                         alt="<?= htmlspecialchars($p->getNomProduit()) ?>"
                     >

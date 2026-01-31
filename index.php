@@ -57,6 +57,14 @@ if (isset($_GET['action'])) {
                 case 'Produits_Femmes';
                 ctlModeFemmes();
                 break;
+            // Produits Hommes
+                case 'Produits_Hommes';
+                ctlModeHommes();
+                break;
+            // Produits Enfants
+                case 'Produits_Enfants';
+                ctlModeEnfants();
+                break;
         default:
             header("location: index.php?action=accueil");
             break;

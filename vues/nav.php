@@ -31,8 +31,8 @@ $role = $isConnected ? $_SESSION['user']->getRole() : null;
         <!-- Liens visibles par TOUS -->
         <li class="nav-item"><a class="nav-link" href="index.php?action=accueil">Accueil</a></li>
         <li class="nav-item"><a class="nav-link" href="index.php?action=Produits_Femmes">Mode Femme</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Mode Enfant</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Mode Homme</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.php?action=Produits_Enfants">Mode Enfant</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.php?action=Produits_Hommes">Mode Homme</a></li>
 
         <!-- ADMIN uniquement -->
         <?php if ($isConnected && $role === 'ADMIN') : ?>
