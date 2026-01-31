@@ -11,7 +11,7 @@ ob_start()
                 
                 <div class="card h-100">
                     <img 
-                        src="assets/img/produits/hommes/<?= htmlspecialchars($p->getImage()) ?>" 
+                        src="assets/img/produits/<?= htmlspecialchars($p->getImage()) ?>" 
                         class="card-img-top" 
                         alt="<?= htmlspecialchars($p->getNomProduit()) ?>"
                     >
@@ -21,7 +21,7 @@ ob_start()
                         <h5 class="card-title"><?= htmlspecialchars($p->getTaille()) ?></h5>
                         <h5 class="card-title">Prix : <?= htmlspecialchars($p->getPrix()) ?> €</h5>
                         <br>
-                        <a href="#" class="btn btn-primary mt-auto">Voir Plus</a>
+                        <a href="index.php?action=detail_produit&id=<?= $p->getId() ?>" class="btn btn-primary mt-auto">Voir Plus</a>
                     </div>
                 </div>
 

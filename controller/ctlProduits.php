@@ -16,3 +16,15 @@ function ctlModeEnfants(){
     $produitEnfants = RecupererProduitEnfants();
     require "vues/ProduitsEnfants.php";
 }
+
+// Detail des produits
+function ctlDetailProduit() {
+    if (isset($_GET['id'])) {
+        $id = (int) $_GET['id'];
+        $produit = AvoirUnProduitParSonId($id);
+
+        require "vues/detailProduit.php";
+    } else {
+        header("loacation: index.php?action=accueil");
+    }
+}

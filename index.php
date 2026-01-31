@@ -65,6 +65,10 @@ if (isset($_GET['action'])) {
                 case 'Produits_Enfants';
                 ctlModeEnfants();
                 break;
+            // Detail des produits en fonction de l'id
+                case 'detail_produit';
+                ctlDetailProduit();
+                break;
         default:
             header("location: index.php?action=accueil");
             break;
