@@ -68,4 +68,51 @@ function ctlAfficherPanier() {
     require "vues/panier.php";
 }
 
+// Modifier quantité dans le panier
+function ctlModifierQuantite() {
+    if (isset($_POST['id'], $_POST['quantite'])) {
+        $id = (int) $_POST['id'];
+        $quantite = (int) $_POST['quantite'];
+
+        if ($quantite > 0) {
+            $_SESSION['panier'][$id] = $quantite;
+        } else {
+            unset($_SESSION['panier'][$id]);
+        }
+    }
+    header("Location: index.php?action=Panier");
+    exit();
+}
+// Supprimer une ligne du panier
+function ctlSupprimerLignePanier() {
+    if (isset($_GET['id'])) {
+        $id = (int) $_GET['id'];
+
+        if (isset($_SESSION['panier'][$id])) {
+            unset($_SESSION['panier'][$id]);
+        }
+    }
+
+    header("Location: index.php?action=Panier");
+    exit();
+}
+
+// Vider Panier entier
+function ctlViderPanier() {
+    unset($_SESSION['panier']);
+
+    header("Location: index.php?action=Panier");
+    exit();
+}
+
+// Valider le panier
+function ctlValiderPanier() {
+    // Pour l’instant : rien
+    // Plus tard : paiement, commande, etc.
+
+    header("Location: index.php?action=Panier");
+    exit();
+}
+
+
 ?>

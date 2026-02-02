@@ -79,6 +79,22 @@ if (isset($_GET['action'])) {
             case 'Panier';
             ctlAfficherPanier();
             break;
+            // Modifier quantité panier
+            case 'modifier_quantite';
+            ctlModifierQuantite();
+            break;
+            // Supprimer un produit du panier
+            case 'supprimer_ligne_panier';
+            ctlSupprimerLignePanier();
+            break;
+            // Vider panier
+            case 'vider_panier';
+            ctlViderPanier();
+            break;
+            // Valider panier
+            case 'valider_panier';
+            ctlValiderPanier();
+            break;
         default:
             header("location: index.php?action=accueil");
             break;
