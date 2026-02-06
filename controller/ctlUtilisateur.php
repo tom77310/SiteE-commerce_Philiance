@@ -113,7 +113,7 @@ function ctlModifierCompteTraitement() {
     ) {
 
         $ok = modifierUtilisateurComplet(
-            $utilisateur->getId(),
+            $utilisateur->getIdUtilisateurs(),
             $nom,
             $prenom,
             $pseudo,

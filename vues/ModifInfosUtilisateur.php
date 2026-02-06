@@ -12,8 +12,7 @@ ob_start();
             name="nom"
             type="text" 
             class="form-control"
-            value="<?= htmlspecialchars($utilisateur->getNom()) ?>"
-            
+            value="<?= htmlspecialchars($utilisateur->getNom()) ?>"            
         >
     </div>
 
@@ -24,6 +23,16 @@ ob_start();
             class="form-control"
             value="<?= htmlspecialchars($utilisateur->getPrenom()) ?>"
             name="prenom"
+        >
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Pseudo</label>
+        <input 
+            type="text" 
+            class="form-control"
+            value="<?= htmlspecialchars($utilisateur->getPseudo()) ?>"
+            name="pseudo"
         >
     </div>
 
@@ -49,6 +58,19 @@ ob_start();
             name="date_naissance"
         >
     </div>
+    <div class="mb-3">
+    <label for="tel" class="form-label">Téléphone</label>
+    <input
+        type="tel"
+        class="form-control"
+        id="tel"
+        name="tel"
+        placeholder="06 12 34 56 78"
+        value="<?= htmlspecialchars($utilisateur->getTel()) ?>"
+        required
+    >
+</div>
+
 
     <button type="submit" class="btn btn-primary">
         Enregistrer les modifications
