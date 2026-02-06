@@ -50,6 +50,9 @@ $role = $isConnected ? $_SESSION['user']->getRole() : null;
               <?php endif; ?>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.php?action=utilisateur_compte">Espace Utilisateur</a>
+          </li>
         <?php endif; ?>
 
         <!-- Déconnexion : USER + ADMIN -->

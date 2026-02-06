@@ -6,7 +6,7 @@ session_start(); // emplacement obligatoire
 // Import des controllers
 require "controller/ctlUtilisateur.php";
 require "controller/ctlProduits.php";
-// require "controller/ctlPanier.php";
+
 
 // Contenu Page d'accueil
 function accueil() {
@@ -39,7 +39,7 @@ if (isset($_GET['action'])) {
         case 'accueil':
             accueil();
             break;
-        // Sécurité
+        // Utilisateur
             // Inscription
             case 'utilisateur_inscription';
                 ctlUtilisateurInscription();
@@ -52,7 +52,20 @@ if (isset($_GET['action'])) {
             case 'utilisateur_deconnexion';
                 ctlUtilisateurDeconnexion();
                 break;
-        
+            // Compte Utilisateur
+            case 'utilisateur_compte';
+                ctlCompteUtilisateur();
+                break;
+            case 'utilisateur_infos';
+                ctlInfoUtilisateur();
+                break;
+            case 'modifier_compte';
+                ctlModifierCompte();
+                break;
+            case 'modifier_compte_traitement';
+                ctlModifierCompteTraitement();
+                break;
+
         // Produits
             // Produits Femmes
                 case 'Produits_Femmes';

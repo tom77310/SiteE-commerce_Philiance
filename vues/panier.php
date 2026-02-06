@@ -1,5 +1,5 @@
 <?php
-$titre = "Mon panier";
+$titre = "Site e-commerce 2022-2023 : Mon panier";
 ob_start();
 ?>
 
