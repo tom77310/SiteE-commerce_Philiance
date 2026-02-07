@@ -140,5 +140,32 @@ function ctlModifierCompteTraitement() {
     exit();
 }
 
+// Suppression de compte utilisateur
+function ctlSupprimerCompte() {
+
+    // Sécurité : vérification que l'utilisateur soit connecter 
+    if (!isset($_SESSION['user'])) {
+        header("Location: index.php?action=utilisateur_connexion");
+        exit();
+    }
+    // Sécurité : POST uniquement 
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        header("Location: index.php?action=utilisateur_compte");
+        exit();
+    }
+
+    $utilisateur = $_SESSION['user'];
+
+    $ok = SupprimerUtilisateurParId($utilisateur->getIdUtilisateurs());
+
+    if ($ok) {
+        // Déconnexion propre
+        session_unset();
+        session_destroy();
+    }
+
+    header("Location: index.php?action=accueil");
+    exit();
+}
 
 ?>

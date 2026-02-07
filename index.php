@@ -65,7 +65,9 @@ if (isset($_GET['action'])) {
             case 'modifier_compte_traitement';
                 ctlModifierCompteTraitement();
                 break;
-
+            case 'supprimer_compte';
+                ctlSupprimerCompte();
+                break;
         // Produits
             // Produits Femmes
                 case 'Produits_Femmes';
