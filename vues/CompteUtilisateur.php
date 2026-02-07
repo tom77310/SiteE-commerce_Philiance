@@ -30,18 +30,25 @@ ob_start();
         </a>
     </div>
 
-    <form method="post" action="index.php?action=supprimer_compte" class="mt-4">
+    <!-- <form method="post" action="index.php?action=supprimer_compte" class="mt-4">
         <button type="submit" class="btn btn-danger">
             Supprimer mon compte
         </button>
-    </form>
+    </form> -->
     <div class="col-md-6">
         <a href="#" class="btn btn-outline-success w-100">
             📦 Historique des commandes
         </a>
     </div>
 
+
 </div>
+
+
+
+
+
+
 
 <?php
 $contenu = ob_get_clean();

@@ -70,7 +70,7 @@ ob_start();
         required
     >
 </div>
-
+<!-- Champs pour modifier le Mot de passe -->
 
     <button type="submit" class="btn btn-primary">
         Enregistrer les modifications

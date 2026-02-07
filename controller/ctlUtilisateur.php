@@ -140,32 +140,66 @@ function ctlModifierCompteTraitement() {
     exit();
 }
 
-// Suppression de compte utilisateur
+// Suppression de compte utilisateur avec verif mot de passe
 function ctlSupprimerCompte() {
 
-    // Sécurité : vérification que l'utilisateur soit connecter 
+    // =========================
+    // 1️⃣ Sécurité : utilisateur connecté
+    // =========================
     if (!isset($_SESSION['user'])) {
         header("Location: index.php?action=utilisateur_connexion");
         exit();
     }
-    // Sécurité : POST uniquement 
+
+    // =========================
+    // 2️⃣ Sécurité : POST uniquement
+    // =========================
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         header("Location: index.php?action=utilisateur_compte");
         exit();
     }
 
+    // =========================
+    // 3️⃣ Récupération utilisateur + mot de passe
+    // =========================
     $utilisateur = $_SESSION['user'];
+    $password = $_POST['password'] ?? '';
 
+    // Si le champ est vide → refus
+    if (empty($password)) {
+        header("Location: index.php?action=utilisateur_compte");
+        exit();
+    }
+
+    // =========================
+    // 4️⃣ Vérification du mot de passe
+    // =========================
+    // getMotDePasse() doit retourner le hash stocké en base
+    if (!password_verify($password, $utilisateur->getMotDePasse())) {
+        // Mot de passe incorrect → retour sans suppression
+        header("Location: index.php?action=utilisateur_compte");
+        exit();
+    }
+
+    // =========================
+    // 5️⃣ Suppression du compte
+    // =========================
     $ok = SupprimerUtilisateurParId($utilisateur->getIdUtilisateurs());
 
+    // =========================
+    // 6️⃣ Déconnexion propre
+    // =========================
     if ($ok) {
-        // Déconnexion propre
         session_unset();
         session_destroy();
     }
 
+    // =========================
+    // 7️⃣ Redirection finale
+    // =========================
     header("Location: index.php?action=accueil");
     exit();
 }
+
 
 ?>
