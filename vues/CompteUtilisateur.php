@@ -41,6 +41,19 @@ ob_start();
         </a>
     </div>
 
+<div class="card mt-4">
+    <div class="card-body">
+        <h5 class="card-title">Sécurité du compte</h5>
+        <p class="card-text">
+            Vous pouvez modifier votre mot de passe à tout moment.
+        </p>
+
+        <a href="index.php?action=modifier_mot_de_passe"
+           class="btn btn-warning">
+            Modifier mon mot de passe
+        </a>
+    </div>
+</div>
 
 </div>
 

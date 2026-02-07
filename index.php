@@ -68,6 +68,15 @@ if (isset($_GET['action'])) {
             case 'supprimer_compte';
                 ctlSupprimerCompte();
                 break;
+            // Mot de passe
+            case 'modifier_mot_de_passe':
+            ctlModifierMotDePasse();
+            break;
+
+            case 'modifier_mot_de_passe_traitement':
+                ctlModifierMotDePasseTraitement();
+                break;
+
         // Produits
             // Produits Femmes
                 case 'Produits_Femmes';

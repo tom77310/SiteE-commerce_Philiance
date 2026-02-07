@@ -346,6 +346,22 @@ function modifierUtilisateurComplet(int $id_utilisateurs, string $Nouveaunom, st
     }finally{
         return $ret;
     }
+}
 
+// Modifier uniquement le mot de passe en fonction de l'id utilisateur
+function modifierMotDePasse(int $id_utilisateurs, string $nouveauMotDePasseHash): bool {
+    $ret = false;
+    $sqlReq = "UPDATE utilisateurs SET motdepasse = :motdepasse WHERE id_utilisateurs = :id_utilisateurs";
 
+    try {
+        $ctxBDD = ConnexionBDD();
+        $req = $ctxBDD->prepare($sqlReq);
+        $req->bindValue(':motdepasse', $nouveauMotDePasseHash, PDO::PARAM_STR);
+        $req->bindValue(':id_utilisateurs', $id_utilisateurs, PDO::PARAM_INT);
+        $ret = $req->execute();
+    } catch (Exception $ex) {
+        var_dump($ex->getMessage());
+    }finally{
+        return $ret;
+    }
 }

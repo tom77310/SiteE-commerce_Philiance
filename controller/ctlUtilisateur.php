@@ -201,5 +201,94 @@ function ctlSupprimerCompte() {
     exit();
 }
 
+// Traitement modif mot de passe
+function ctlModifierMotDePasseTraitement() {
+
+    // =========================
+    // 1️⃣ Sécurité : connecté
+    // =========================
+    if (!isset($_SESSION['user'])) {
+        header("Location: index.php?action=utilisateur_connexion");
+        exit();
+    }
+
+    // =========================
+    // 2️⃣ Sécurité : POST uniquement
+    // =========================
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        header("Location: index.php?action=utilisateur_compte");
+        exit();
+    }
+
+    $utilisateur = $_SESSION['user'];
+
+    // =========================
+    // 3️⃣ Récupération des champs
+    // =========================
+    $ancien = $_POST['ancien_mot_de_passe'] ?? '';
+    $nouveau = $_POST['nouveau_mot_de_passe'] ?? '';
+    $confirmation = $_POST['confirmation_mot_de_passe'] ?? '';
+
+    // =========================
+    // 4️⃣ Vérifications
+    // =========================
+    if (
+        empty($ancien) ||
+        empty($nouveau) ||
+        empty($confirmation)
+    ) {
+        header("Location: index.php?action=modifier_mot_de_passe");
+        exit();
+    }
+
+    // Vérifier l’ancien mot de passe
+    if (!password_verify($ancien, $utilisateur->getMotDePasse())) {
+        header("Location: index.php?action=modifier_mot_de_passe");
+        exit();
+    }
+
+    // Vérifier la confirmation
+    if ($nouveau !== $confirmation) {
+        header("Location: index.php?action=modifier_mot_de_passe");
+        exit();
+    }
+
+    // =========================
+    // 5️⃣ Hash du nouveau mot de passe
+    // =========================
+    $nouveauHash = password_hash($nouveau, PASSWORD_DEFAULT);
+
+    // =========================
+    // 6️⃣ Mise à jour en base
+    // =========================
+    $ok = modifierMotDePasse(
+        $utilisateur->getIdUtilisateurs(),
+        $nouveauHash
+    );
+
+    // =========================
+    // 7️⃣ Mise à jour session
+    // =========================
+    if ($ok) {
+        $utilisateur->setMotDePasse($nouveauHash);
+        $_SESSION['user'] = $utilisateur;
+    }
+
+    // =========================
+    // 8️⃣ Redirection finale
+    // =========================
+    header("Location: index.php?action=utilisateur_compte");
+    exit();
+}
+
+
+function ctlModifierMotDePasse() {
+    if (!isset($_SESSION['user'])) {
+        header("Location: index.php?action=utilisateur_connexion");
+        exit();
+    }
+
+    require "vues/modifierMotDePasse.php";
+}
 
 ?>
