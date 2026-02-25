@@ -107,10 +107,16 @@ function ctlViderPanier() {
 
 // Valider le panier
 function ctlValiderPanier() {
-    
-
-    header("Location: index.php?action=Panier");
-    exit();
+    // On vérifie que le panier existe
+    if (!isset($_SESSION['panier']) || empty($_SESSION['panier'])) {
+        header("Location: index.php?action=Panier");
+        exit();
+    }
+    // On vérifie si l'utilisateur est connecté
+    if (!isset($_SESSION['user'])) {
+        header("Location: index.php?action=utilisateur_connexion");
+        exit();
+    }
 }
 
 
