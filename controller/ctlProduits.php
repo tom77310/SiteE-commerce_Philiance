@@ -107,8 +107,7 @@ function ctlViderPanier() {
 
 // Valider le panier
 function ctlValiderPanier() {
-    // Pour l’instant : rien
-    // Plus tard : paiement, commande, etc.
+    
 
     header("Location: index.php?action=Panier");
     exit();

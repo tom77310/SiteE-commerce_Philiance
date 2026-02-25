@@ -46,18 +46,19 @@ ob_start();
         >
     </div>
 
-    <div class="mb-3">
+    <!-- <div class="mb-3">
         <label class="form-label">Date de naissance</label>
         <?php
-            $date = new DateTime($utilisateur->getDateNaissance());
+            // $date = new DateTime($utilisateur->getDateNaissance());
         ?>
         <input 
             type="text" 
             class="form-control"
-            value="<?= $date->format('d/m/Y') ?>"
-            name="date_naissance"
+            value="
+            //$date->format('d/m/Y') probleme de modif date de naissance            
+           "name="date_naissance"
         >
-    </div>
+    </div> -->
     <div class="mb-3">
     <label for="tel" class="form-label">Téléphone</label>
     <input

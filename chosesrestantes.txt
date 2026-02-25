@@ -1,0 +1,13 @@
+Choses restantes a faire :
+
+- mise en place de la commande
+- historique de commandes
+- Espace Admin à faire (gestion de produits et utilisateurs, gestion des commandes)
+- Mise en place d'un formulaire de contact qui envoie le message vers un mail spécifique
+- refaire la page d'accueil (nouveauté, promos...)
+- Footer
+- Couleurs de l'interface
+- Resoudre le problème de l'affichage du logo dans la barre de nav
+- refaire le design des formulaires d'inscription et de connexion
+- dysfonctionnement modif -> la date de naissance n'est pas modifiable pour l'instant
+- Correction affichage formulaire connexion / inscription
