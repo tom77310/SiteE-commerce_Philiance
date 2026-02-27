@@ -4,6 +4,7 @@ Choses restantes a faire :
 - historique de commandes
 - Espace Admin à faire (gestion de produits et utilisateurs, gestion des commandes)
 - Mise en place d'un formulaire de contact qui envoie le message vers un mail spécifique
+- Faire tous le système des avis clients
 - refaire la page d'accueil (nouveauté, promos...)
 - Footer
 - Couleurs de l'interface

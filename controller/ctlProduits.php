@@ -1,6 +1,9 @@
 <?php
-
+// Import necessaire
 require "model/produit.php";
+require "model/commande.php";
+require "model/detailCommande.php";
+
 // Recuperer tous les produits pour Femmes
 function ctlModeFemmes(){
     $produitFemmes = RecupererProduitFemme();
@@ -117,6 +120,52 @@ function ctlValiderPanier() {
         header("Location: index.php?action=utilisateur_connexion");
         exit();
     }
+    $panier = $_SESSION['panier'];
+    $total = 0;
+
+    // Calcul du total du panier
+    foreach ($panier as $id => $quantite) {
+        $produit = AvoirUnProduitParSonId($id);
+        if ($produit) {
+            $total += $produit->getPrix()* $quantite;
+        }
+    }
+
+    // Création de la commande
+    $commande = new Commande();
+    $commande->setReference("CMD-" . date("Ymd") . "-" . uniqid());
+    $commande->setMontant($total);
+    $commande->setDate(new DateTime());
+    $commande->setIdUtilisateur($_SESSION['user']->getIdUtilisateurs());
+
+    // Enregistrement en BDD
+    $idCommande = creationCommande($commande);
+
+    // Enregistrement des produits de la commande
+    foreach ($panier as $id => $quantite) {
+        $produit = AvoirUnProduitParSonId($id);
+
+        if ($produit) {
+            $detail = new detailCommande();
+            $detail->setIdCommande($idCommande);
+            $detail->setIdProduit($id);
+            $detail->setQuantite($quantite);
+            $detail->setPrixUnitaire($produit->getPrix());
+
+            AjouterDetailCommande($detail);
+        }
+    }
+
+    // On vide le panier après validation de la commande
+    unset($_SESSION['panier']);
+
+    echo "Commande créer avec succès ! Id Commande : " . $idCommande;
+    exit();
+
+
+    // Vérification du fonctionnement
+    // var_dump($idCommande);
+    // die();
 }
 
 

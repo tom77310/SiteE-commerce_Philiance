@@ -114,7 +114,7 @@ function AjouterDetailCommande(detailCommande $detail): bool {
         $req->bindValue('id_commande', $detail->getIdCommande(), PDO::PARAM_INT);
         $req->bindValue('id_produit', $detail->getIdProduit(), PDO::PARAM_INT);
         $req->bindValue(':quantite', $detail->getQuantite(), PDO::PARAM_INT);
-        $req->bindValue('prix_unitaire', $detail->getPrixUnitaire());
+        $req->bindValue(':prix_unitaire', $detail->getPrixUnitaire());
 
         $ret = $req->execute();
 
