@@ -141,6 +141,12 @@ function ctlValiderPanier() {
     // Enregistrement en BDD
     $idCommande = creationCommande($commande);
 
+    // Sécurité => vérifier que la commande à bien été créer
+    if ($idCommande <= 0) {
+        echo "Erreur lors de la création de la commande";
+        exit();
+    }
+
     // Enregistrement des produits de la commande
     foreach ($panier as $id => $quantite) {
         $produit = AvoirUnProduitParSonId($id);
@@ -159,14 +165,23 @@ function ctlValiderPanier() {
     // On vide le panier après validation de la commande
     unset($_SESSION['panier']);
 
-    echo "Commande créer avec succès ! Id Commande : " . $idCommande;
+    // Redirection vers la page de recap
+    header("Location: index.php?action=recap_commande&id=" . $idCommande);
     exit();
-
-
-    // Vérification du fonctionnement
-    // var_dump($idCommande);
-    // die();
 }
 
+// Afficher le recap de la commande
+function ctlRecapCommande() {
+    if (!isset($_GET['id'])) {
+        header("Location: index.php?action=accueil");
+        exit();
+    }
+    $idCommande = (int) $_GET['id'];
+
+    $commande = RecupererUneCommandeParId($idCommande);
+    $details = RecupererDetailsCommande($idCommande);
+
+    require "vues/recapCommande.php";
+}
 
 ?>

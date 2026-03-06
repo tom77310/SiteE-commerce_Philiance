@@ -113,7 +113,7 @@ function creationCommande(Commande $commande): int {
         $req = $ctxBDD->prepare($sqlReq);
         $req->bindValue(':reference', $commande->getReference(), PDO::PARAM_STR);
         $req->bindValue(':montant', $commande->getMontant());
-        $req->bindValue(':date', $commande->getDate()->format("d-m-Y"));
+        $req->bindValue(':date', $commande->getDate()->format("Y-m-d H:i:s"));
         $req->bindValue(':utilisateur', $commande->getIdUtilisateur());
 
         $ret = $req->execute();
@@ -156,4 +156,36 @@ function NbCommandes(): int {
         return $nbcommande;
     }
 
+}
+
+// Récupérer une commande par son id
+function RecupererUneCommandeParId(int $idCommande) {
+
+    $sqlReq = "SELECT * FROM commande WHERE id_commande = :id_commande";
+
+    try {
+        $ctxBDD = ConnexionBDD();
+        $req = $ctxBDD->prepare($sqlReq);
+        $req->bindValue(':id_commande', $idCommande, PDO::PARAM_INT);
+        $req->execute();
+
+        $data = $req->fetch(PDO::FETCH_ASSOC);
+
+        if (!$data) {
+            return null;
+        }
+
+        $commande = new Commande();
+        $commande->setIdCommande($data['id_commande']);
+        $commande->setReference($data['reference']);
+        $commande->setMontant($data['montant']);
+        $commande->setDate(new DateTime($data['date']));
+        $commande->setIdUtilisateur($data['id_utilisateur']);
+
+        return $commande;
+
+    } catch (Exception $ex) {
+        var_dump($ex->getMessage());
+        return null;
+    }
 }

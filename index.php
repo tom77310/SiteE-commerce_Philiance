@@ -3,6 +3,9 @@ require "model/utilisateurs.php";
 
 session_start(); // emplacement obligatoire 
 
+// Definition du fuseau horraire
+date_default_timezone_set('Europe/Paris');
+
 // Import des controllers
 require "controller/ctlUtilisateur.php";
 require "controller/ctlProduits.php";
@@ -118,6 +121,10 @@ if (isset($_GET['action'])) {
             // Valider panier
             case 'valider_panier';
             ctlValiderPanier();
+            break;
+        // Commande
+            case 'recap_commande';
+            ctlRecapCommande();
             break;
         default:
             header("location: index.php?action=accueil");
