@@ -36,7 +36,7 @@ ob_start();
         </button>
     </form> -->
     <div class="col-md-6">
-        <a href="#" class="btn btn-outline-success w-100">
+        <a href="index.php?action=historique_commandes" class="btn btn-outline-success w-100">
             📦 Historique des commandes
         </a>
     </div>

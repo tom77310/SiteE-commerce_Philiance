@@ -184,4 +184,22 @@ function ctlRecapCommande() {
     require "vues/recapCommande.php";
 }
 
+
+// Historique de commande
+function ctlHistoriqueCommandesUtilisateurs(){
+    // On verifie si l'utilisateur est bien connecter
+    if (!isset($_SESSION['user'])) { // Si l'utillisateur n'est pas connecté
+        header("Location: index.php?action=utilisateur_connexion"); // On le redirige sur la page de connexion
+        exit();
+    }
+    // Si l'utillisateur est connecté : 
+    // on récupère l'id de l'utilisateur connecté 
+    $idUtilisateur = $_SESSION['user']->getIdUtilisateurs();
+
+    // puis on récupère les commandes de cet utilisateur
+    $commandes = RecupererCommandeParUtilisateur($idUtilisateur);
+
+    // et on charge la vue
+    require "vues/historiqueCommandes.php";
+}
 ?>

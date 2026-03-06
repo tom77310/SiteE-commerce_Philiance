@@ -189,3 +189,37 @@ function RecupererUneCommandeParId(int $idCommande) {
         return null;
     }
 }
+
+// Récupérer toutes les commandes d'un utilisateur
+function RecupererCommandeParUtilisateur(int $idUtilisateur): array {
+    $commandes = [];
+
+    $sqlReq = "SELECT * FROM commande WHERE id_utilisateur = :id_utilisateur ORDER BY date DESC"; // On récupère les commandes et on les tri de la plus récente 
+                                                                                                 // a la plus ancienne
+    try {
+        $ctxBDD = ConnexionBDD();
+        $req = $ctxBDD->prepare($sqlReq);
+
+        $req->bindValue(':id_utilisateur', $idUtilisateur, PDO::PARAM_INT);
+        $req->execute();
+
+        $dateCommandes = $req->fetchAll(PDO::FETCH_ASSOC); // récupère d'abord en tableau associatif
+
+        foreach ($dateCommandes as $date) {
+            $commande = new Commande();
+            $commande->setIdCommande($date['id_commande']);
+            $commande->setReference($date['reference']);
+            $commande->setMontant($date['montant']);
+            $commande->setDate(new DateTime($date['date'])); // transforme la string en DateTime
+            $commande->setIdUtilisateur($date['id_utilisateur']);
+
+            $commandes[] = $commande;
+        }
+
+    } catch (Exception $ex) {
+        var_dump($ex->getMessage());
+    }
+    
+    return $commandes;
+    
+}

@@ -126,6 +126,9 @@ if (isset($_GET['action'])) {
             case 'recap_commande';
             ctlRecapCommande();
             break;
+            case 'historique_commandes';
+            ctlHistoriqueCommandesUtilisateurs();
+            break;
         default:
             header("location: index.php?action=accueil");
             break;
