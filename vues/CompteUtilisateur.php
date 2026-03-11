@@ -57,12 +57,6 @@ ob_start();
 
 </div>
 
-
-
-
-
-
-
 <?php
 $contenu = ob_get_clean();
 require "vues/template.php";

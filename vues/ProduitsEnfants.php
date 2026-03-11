@@ -11,7 +11,7 @@ ob_start()
                 
                 <div class="card h-100">
                     <img 
-                        src="assets/img/produits/<?= htmlspecialchars($p->getImage()) ?>" 
+                        src="assets/img/produits/<?= $p->getSexe()?>s/<?= $p->getImage() ?>" 
                         class="card-img-top" 
                         alt="<?= htmlspecialchars($p->getNomProduit()) ?>"
                     >

@@ -36,8 +36,7 @@ $role = $isConnected ? $_SESSION['user']->getRole() : null;
 
         <!-- ADMIN uniquement -->
         <?php if ($isConnected && $role === 'ADMIN') : ?>
-          <li class="nav-item"><a class="nav-link" href="index.php?action=admin_utilisateurs">Utilisateurs</a></li>
-          <li class="nav-item"><a class="nav-link" href="index.php?action=admin_produits">Produits</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.php?action=Admin_EspaceAdmin">Espace Administrateur</a></li>
         <?php endif; ?>
 
         <!-- USER uniquement -->

@@ -1,16 +1,20 @@
 Choses restantes a faire :
 
 - mise en place de la commande (fait)
-- detail de commande après validation (fait)
+- détail de commande après validation (fait)
 - historique de commandes (fait)
 - Espace Admin à faire (gestion de produits et utilisateurs, gestion des commandes)
 - Mise en place d'un formulaire de contact qui envoie le message vers un mail spécifique
 - Faire tous le système des avis clients
-- refaire la page d'accueil (nouveauté, promos...)
+- refaire la page d'accueil (nouveauté, promos…)
 - Footer
 - Couleurs de l'interface
-- Resoudre le problème de l'affichage du logo dans la barre de nav
+- Ajout de la possibilité de suppressions des commandes dans l'historique de commandes
+- Résoudre le problème de l'affichage du logo dans la barre de nav
 - refaire le design des formulaires d'inscription et de connexion
 - dysfonctionnement modif -> la date de naissance n'est pas modifiable pour l'instant
 - Correction affichage formulaire connexion / inscription
-- Sécurrité des URL en fonction du role 
+- Sécurité des URL en fonction du role 
+
+Idée de nouvelles fonctionnalités
+- Faire un tri des produits pour les admin

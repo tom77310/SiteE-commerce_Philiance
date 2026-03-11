@@ -9,6 +9,7 @@ date_default_timezone_set('Europe/Paris');
 // Import des controllers
 require "controller/ctlUtilisateur.php";
 require "controller/ctlProduits.php";
+require "controller/ctlAdministrateur.php";
 
 
 // Contenu Page d'accueil
@@ -129,6 +130,24 @@ if (isset($_GET['action'])) {
             case 'historique_commandes';
             ctlHistoriqueCommandesUtilisateurs();
             break;
+        // Administrateur
+            // Espace Admin
+            case 'Admin_EspaceAdmin';
+            ctlEspaceAdmin();
+            break;
+            // Gestion des produits
+                // Liste des Produits
+                    case 'Admin_Produits';
+                    ctlAdminProduits();
+                    break;
+                // Ajout d'un produit
+                case 'Admin_AjouterProduit';
+                ctlAdminAjoutProduit();
+                break;
+                // Enregistrement Produit avec image
+                case 'Admin_EnregistrementProduit';
+                ctlAdminEnregistrementProduit();
+                break;
         default:
             header("location: index.php?action=accueil");
             break;

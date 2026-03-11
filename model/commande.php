@@ -134,7 +134,7 @@ function creationCommande(Commande $commande): int {
 function NbCommandes(): int {
     $nbcommande = 0;
 
-    $sqlReq = "SELECT COUNT(id_commande) as nb_commandes FROM commande GROUP BY id_commande";
+    $sqlReq = "SELECT COUNT(*) as nb_commandes FROM commande";
 
     try {
         $ctxBDD =  ConnexionBDD();
