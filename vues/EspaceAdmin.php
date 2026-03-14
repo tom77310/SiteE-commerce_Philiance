@@ -31,7 +31,7 @@ ob_start();
                 <p class="display-6">
                     <?= $nbUtilisateurs ?>
                 </p>
-                <a href="index.php?action=Admin_Utilisateurs"
+                <a href="index.php?action=Admin_ListeUtilisateurs"
                    class="btn btn-outline-success w-100">
                     Gérer les utilisateurs
                 </a>
@@ -46,7 +46,7 @@ ob_start();
                 <p class="display-6">
                     <?= $nbCommandes ?>
                 </p>
-                <a href="index.php?action=Admin_Commandes"
+                <a href="index.php?action=Admin_ListeCommandes"
                 class="btn btn-outline-warning w-100">
                     Gérer les Commandes
                 </a>

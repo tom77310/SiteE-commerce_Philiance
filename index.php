@@ -148,6 +148,16 @@ if (isset($_GET['action'])) {
                 case 'Admin_EnregistrementProduit';
                 ctlAdminEnregistrementProduit();
                 break;
+            // Gestion des Utilisateurs
+                // Liste des utilisateurs
+                case 'Admin_ListeUtilisateurs';
+                ctlAdminUtilisateurs();
+                break;
+            // Gestion des Commandes des utilisateurs
+                // Liste des commandes
+                case 'Admin_ListeCommandes';
+                ctlAdminCommandes();
+                break;
         default:
             header("location: index.php?action=accueil");
             break;

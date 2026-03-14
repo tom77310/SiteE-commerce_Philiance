@@ -83,3 +83,17 @@ function ctlAdminEnregistrementProduit(){
     // Redirection
     header("Location: index.php?action=Admin_Produits");
 }
+
+// Utilisateurs
+    // Affichage de la liste des utilisateurs du site
+    function ctlAdminUtilisateurs() {
+        $utilisateurs = TousLesUtilisateurs();
+        require "vues/UtilisateursAdmin.php";
+    }
+
+// Commandes
+    // Affichage de la liste de toutes les commandes du site
+    function ctlAdminCommandes() {
+        $commandes = ToutesLesCommandes();
+        require "vues/ListeCommandesAdmin.php";
+    }

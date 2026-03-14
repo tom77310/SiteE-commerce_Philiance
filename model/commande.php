@@ -223,3 +223,20 @@ function RecupererCommandeParUtilisateur(int $idUtilisateur): array {
     return $commandes;
     
 }
+
+// Fonction pour récupèrer toutes les commandes
+function ToutesLesCommandes(): array {
+    $commandes = [];
+    $sqlReq = "SELECT c.id_commande, c.reference, c.montant, c.date, u.nom,u.prenom, u.pseudo
+                FROM commande c JOIN utilisateurs u
+                ON c.id_utilisateur = u.id_utilisateurs ORDER BY c.date DESC";
+    
+    try {
+        $ctxBDD = ConnexionBDD();
+        $req = $ctxBDD->query($sqlReq);
+        $commandes = $req->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $ex) {
+        var_dump($ex->getMessage());
+    }
+    return $commandes;
+}

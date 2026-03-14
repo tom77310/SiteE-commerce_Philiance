@@ -35,7 +35,7 @@ ob_start();
                 <tr>
                     <td><?= $produit->getId() ?></td>
                     <td>
-                        <img src="assets/img/produits/<?= htmlspecialchars($produit->getImage()) ?>"
+                        <img src="assets/img/produits/<?= $produit->getSexe()?>s/<?= htmlspecialchars($produit->getImage()) ?>"
                              width="60"
                              class="img-thumbnail">
                     </td>
