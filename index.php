@@ -148,6 +148,18 @@ if (isset($_GET['action'])) {
                 case 'Admin_EnregistrementProduit';
                 ctlAdminEnregistrementProduit();
                 break;
+                // Modifier un produit
+                case 'Admin_ModifierProduit';
+                ctlAdminModifierProduit();
+                break;
+                // Enregistrer Modification Produit
+                case 'Admin_UpdateProduit';
+                ctlAdminUpdateProduit();
+                break;
+                // Supprimer Produit
+                case 'Admin_SupprimerProduit';
+                ctlAdminSupprimerProduit();
+                break;
             // Gestion des Utilisateurs
                 // Liste des utilisateurs
                 case 'Admin_ListeUtilisateurs';

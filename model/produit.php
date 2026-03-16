@@ -220,6 +220,45 @@ function AjoutProduit(Produit $produit){
     }
 }
 
+// Supprimer un produit
+function SupprimerProduit(int $id) {
+    $sqlReq = "DELETE FROM produit WHERE id_produit = :id";
+    try {
+        $ctxBDD = ConnexionBDD();
+        $req = $ctxBDD->prepare($sqlReq);
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+    } catch (Exception $ex) {
+        var_dump($ex->getMessage());
+        die();
+    }
+}
+
+// Modifier un produit
+function ModifierProduit($id, $nom, $taille, $sexe, $type, $categorie, $prix, $image) {
+    $sqlReq = "UPDATE produit SET nom_produit = :nom, taille = :taille, sexe = :sexe, type_vetement = :type, categorie_vetement = :categorie, prix = :prix, image = :image
+                WHERE id_produit = :id";
+    
+    try {
+        $ctxBDD = ConnexionBDD();
+        $req = $ctxBDD->prepare($sqlReq);
+
+        $req->bindValue(':id', $id);
+        $req->bindValue(':nom', $nom);
+        $req->bindValue(':taille', $taille);
+        $req->bindValue(':sexe', $sexe);
+        $req->bindValue(':type', $type);
+        $req->bindValue(':categorie', $categorie);
+        $req->bindValue(':prix', $prix);
+        $req->bindValue(':image', $image);
+
+        $req->execute();
+    } catch (Exception $ex) {
+        var_dump($ex->getMessage());
+        die();
+    }
+}
+
 // Recuperer les produits par sexe
 // Produits pour les Femmes
 function RecupererProduitFemme():array {

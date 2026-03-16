@@ -43,7 +43,7 @@ ob_start();
             <button class="btn btn-success">
                 Ajouter le produit
             </button>
-            <a href="index.php?action=Admin_Produits">
+            <a href="index.php?action=Admin_Produits" class="btn btn-secondary">
                 Annuler
             </a>
         </form>

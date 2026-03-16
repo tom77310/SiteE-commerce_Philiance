@@ -7,7 +7,7 @@ Choses restantes a faire :
     - Affichage Liste Utilisateur/Produits/Commandes (fait)
     - Ajouter un produit (fait)
     - Dés l'ajout d'un produit, la page se crée seule (fait)
-    - Modifier et supprimer un produit
+    - Modifier et supprimer un produit (fait)
     - Supprimer un utilisateur
     - Supprimer une commande
     - Modifier uniquement le role d'un utilisateur
@@ -22,6 +22,7 @@ Choses restantes a faire :
 - dysfonctionnement modif -> la date de naissance n'est pas modifiable pour l'instant
 - Sécurité des URL en fonction du role 
 - Enlever le bouton d'ajout de panier pour les admin
+- Modifier le boutton dans la page detail commande (Si ADMIN : redirection espace admin, si USER : redirection espace utilisateur ou historique commande)
 
 Idée de nouvelles fonctionnalités
 - Faire un tri des produits pour les admin

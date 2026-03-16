@@ -8,7 +8,7 @@ ob_start();
 
         <div class="col-md-6">
             <img 
-                src="assets/img/produits/<?= htmlspecialchars($produit->getImage()) ?>" 
+                src="assets/img/produits/<?= $produit->getSexe()?>s/<?= $produit->getImage() ?>"  
                 class="img-fluid"
                 alt="<?= htmlspecialchars($produit->getNomProduit()) ?>"
             >
