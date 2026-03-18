@@ -2,6 +2,7 @@
 require_once "model/utilisateurs.php";
 require_once "model/produit.php";
 require_once "model/commande.php";
+require_once "model/detailCommande.php";
 
 // Espace Admin
 function ctlEspaceAdmin() {
@@ -148,10 +149,52 @@ function ctlAdminUpdateProduit(){
         $utilisateurs = TousLesUtilisateurs();
         require "vues/UtilisateursAdmin.php";
     }
+    // Supprimer un utilisateur
+    function ctlAdminSupprimerUtilisateur() {
+        $id_utillisateur = $_GET['id'];
+        SupprimerUtilisateurParId($id_utillisateur);
+        header("Location: index.php?action=Admin_Utilisateurs");
+    }
+    // Modifier le role d'un utilisateur
+    function ctlAdminModifierRoleUtilisateur() {
+        if (isset($_GET['id']) && isset($_GET['role'])) {
+            $id = intval($_GET['id']);
+            $role = $_GET['role'];
+
+            // Empêcher de modifier son propre rôle
+            if ($id == $_SESSION['user']->getIdUtilisateurs()) {
+                die("Impossible de modifier votre propre rôle");
+            }
+
+            // Sécurité : autoriser seulement certains rôles
+            if ($role !== 'ADMIN' && $role !== 'USER') {
+                die("Rôle invalide");
+            }
+            ModifierRoleUtilisateur($id, $role);
+        }
+        header("Location: index.php?action=Admin_ListeUtilisateurs");
+        exit();
+    }
 
 // Commandes
     // Affichage de la liste de toutes les commandes du site
     function ctlAdminCommandes() {
         $commandes = ToutesLesCommandes();
         require "vues/ListeCommandesAdmin.php";
+    }
+    // Supprimer une commande 
+    function ctlAdminSupprimerCommande() {
+        if (isset($_GET['id'])) {
+            $idCommande = intval($_GET['id']);
+
+            // Supprime tous les détails de la commande
+            SupprimerDetailsCommande($idCommande);
+
+            // Supprime la commande elle-même
+            SupprimerCommandeParId($idCommande);
+        }
+
+        // Redirection vers la liste des commandes
+        header("Location: index.php?action=Admin_ListeCommandes");
+        exit();
     }

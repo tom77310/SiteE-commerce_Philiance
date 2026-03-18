@@ -165,10 +165,22 @@ if (isset($_GET['action'])) {
                 case 'Admin_ListeUtilisateurs';
                 ctlAdminUtilisateurs();
                 break;
+                // Supprimer un utilisateur
+                case 'Admin_SupprimerUtilisateur';
+                    ctlAdminSupprimerUtilisateur();
+                    break;
+                // Modifier Role Utilisateur
+                case 'Admin_ModifierRoleUtilisateur';
+                    ctlAdminModifierRoleUtilisateur();
+                    break;
             // Gestion des Commandes des utilisateurs
                 // Liste des commandes
                 case 'Admin_ListeCommandes';
                 ctlAdminCommandes();
+                break;
+                // Supprimer une commande (coter admin)
+                case 'Admin_SupprimerCommande';
+                ctlAdminSupprimerCommande();
                 break;
         default:
             header("location: index.php?action=accueil");

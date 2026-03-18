@@ -8,14 +8,12 @@ Choses restantes a faire :
     - Ajouter un produit (fait)
     - Dés l'ajout d'un produit, la page se crée seule (fait)
     - Modifier et supprimer un produit (fait)
-    - Supprimer un utilisateur
-    - Supprimer une commande
-    - Modifier uniquement le role d'un utilisateur
+    - Supprimer un utilisateur, supprime automatiquement les commandes associées et leurs détails (fait)
+    - Supprimer une commande (fait)
+    - Modifier uniquement le role d'un utilisateur (fait)
 - Mise en place d'un formulaire de contact qui envoie le message vers un mail spécifique
 - Faire tous le système des avis clients
-- refaire la page d'accueil (nouveauté, promos…)
 - Footer
-- Couleurs de l'interface
 - Ajout de la possibilité de suppressions des commandes dans l'historique de commandes
 - Résoudre le problème de l'affichage du logo dans la barre de nav
 - refaire le design des formulaires d'inscription et de connexion
@@ -23,9 +21,12 @@ Choses restantes a faire :
 - Sécurité des URL en fonction du role 
 - Enlever le bouton d'ajout de panier pour les admin
 - Modifier le boutton dans la page detail commande (Si ADMIN : redirection espace admin, si USER : redirection espace utilisateur ou historique commande)
+- refaire la page d'accueil (nouveauté, promos…)
+- Couleurs de l'interface
 
 Idée de nouvelles fonctionnalités
 - Faire un tri des produits pour les admin
 - Faire plusieurs satus des commandes : Comfirmée, en cours, terminées
 - Faire en sorte que le status soit mis a jour au niveau de la vue utilisateur
 - Mettre en place une platforme fictive de paiement
+- Tableaux stats coter admin

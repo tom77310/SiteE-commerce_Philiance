@@ -240,3 +240,19 @@ function ToutesLesCommandes(): array {
     }
     return $commandes;
 }
+
+// Supprimer une commande par son id
+function SupprimerCommandeParId(int $idCommande):bool {
+    $ret = false;
+    $sqlReq = "DELETE FROM commande WHERE id_commande = :id_commande";
+
+    try {
+        $ctxBDD = ConnexionBDD();
+        $req = $ctxBDD->prepare($sqlReq);
+        $req->bindValue(':id_commande', $idCommande, PDO::PARAM_INT);
+        $ret = $req->execute();
+    } catch (Exception $ex) {
+        var_dump($ex->getMessage());
+    }
+    return $ret;
+}

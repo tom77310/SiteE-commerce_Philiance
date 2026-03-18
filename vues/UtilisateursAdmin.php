@@ -42,7 +42,17 @@ ob_start();
                             <?php } ?>
                         </td>
                         <td>
-                            <a href="index.php?action=Admin_ModifierUtilisateur&id=<?= $utilisateur->getIdUtilisateurs() ?>" class="btn btn-sm btn-warning">Modifier</a>
+                            <?php if ($utilisateur->getRole() == 'ADMIN') { ?>
+                                <a href="index.php?action=Admin_ModifierRoleUtilisateur&id=<?= $utilisateur->getIdUtilisateurs() ?>&role=USER" 
+                                    class="btn btn-sm btn-warning">
+                                    Retirer Role Admin
+                                </a>
+                                <?php } else { ?>
+                                <a href="index.php?action=Admin_ModifierRoleUtilisateur&id=<?= $utilisateur->getIdUtilisateurs() ?>&role=ADMIN"
+                                    class="btn btn-sm btn-success">
+                                    Mettre role Admin
+                                </a>
+                            <?php } ?>                        
                             <a href="index.php?action=Admin_SupprimerUtilisateur&id=<?= $utilisateur->getIdUtilisateurs() ?>" 
                                 class="btn btn-sm btn-warning" 
                                 onclick="return confirm('Voulez vous vraiment supprimer cet utilisateur ?')">

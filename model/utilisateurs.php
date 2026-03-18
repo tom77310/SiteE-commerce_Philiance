@@ -308,21 +308,24 @@ function ChangerRoleUtilisateur(int $id_utilisateurs, string $nouveauRole): bool
 }
 
 // Supprimer un utilisateur par son id
-function SupprimerUtilisateurParId(int $id_utilisateurs):bool {
+function SupprimerUtilisateurParId(int $id_utilisateurs) {
     $sqlReq = "DELETE FROM utilisateurs WHERE id_utilisateurs=:id_utilisateurs";
 
     try {
         $ctxBDD = ConnexionBDD();
         $req = $ctxBDD->prepare($sqlReq);
         $req->bindValue(':id_utilisateurs', $id_utilisateurs, PDO::PARAM_INT);
-        $req->setFetchMode(PDO::FETCH_CLASS, 'Utilisateurs');
-        $ret = $req->execute();
+        // $req->setFetchMode(PDO::FETCH_CLASS, 'Utilisateurs');
+        // $ret = $req->execute();
+        $req->execute();
 
     } catch (Exception $ex) {
         var_dump($ex->getMessage());
-    }finally{
-        return $ret;
+        die();
     }
+    // finally{
+    //     return $ret;
+    // }
 }
 
 // Modifier toutes les infos utilisateurs par rapport a l'id
@@ -364,4 +367,25 @@ function modifierMotDePasse(int $id_utilisateurs, string $nouveauMotDePasseHash)
     }finally{
         return $ret;
     }
+}
+
+// Modifier le role d'un utilisateur
+function ModifierRoleUtilisateur(int $id, string $role):bool {
+    $ret = false;
+    $sqlReq = "UPDATE utilisateurs SET role = :role WHERE id_utilisateurs = :id";
+
+    try {
+        $ctxBDD = ConnexionBDD();
+        $req = $ctxBDD->prepare($sqlReq);
+
+        $req->bindValue(':role', $role);
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+
+        $ret = $req->execute();
+
+    } catch (Exception $ex) {
+        var_dump($ex->getMessage());
+        die();
+    }
+    return $ret;
 }

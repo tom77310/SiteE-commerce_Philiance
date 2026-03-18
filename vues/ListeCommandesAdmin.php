@@ -43,6 +43,10 @@ ob_start();
                             <a href="index.php?action=recap_commande&id=<?= $commande['id_commande'] ?>" class="btn btn-sm btn-primary">
                                 Voir
                             </a>
+                            <a href="index.php?action=Admin_SupprimerCommande&id=<?= $commande['id_commande'] ?>" class="btn btn-sm btn-danger"
+                            onclick="return confirm('Etes-vous sûr de vouloir supprimer cette commande ?')">
+                                Suprimer
+                            </a>
                         </td>
                     </tr>
                 <?php } ?>
