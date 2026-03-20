@@ -10,6 +10,7 @@ date_default_timezone_set('Europe/Paris');
 require "controller/ctlUtilisateur.php";
 require "controller/ctlProduits.php";
 require "controller/ctlAdministrateur.php";
+require "controller/ctlEnvoyerContact.php";
 
 
 // Contenu Page d'accueil
@@ -80,6 +81,14 @@ if (isset($_GET['action'])) {
             case 'modifier_mot_de_passe_traitement':
                 ctlModifierMotDePasseTraitement();
                 break;
+            // Afficher le Formulaire de contact
+            case 'formulaire_contact';
+            require 'vues/formulairecontact.php';
+            break;
+            // Envoie du formulaire
+            case 'envoyer_contact';
+            ctlEnvoyerContact();
+            break;
 
         // Produits
             // Produits Femmes
