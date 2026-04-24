@@ -1,8 +1,9 @@
 <?php
 // Import necessaire
-require "model/produit.php";
-require "model/commande.php";
-require "model/detailCommande.php";
+require_once "model/produit.php";
+require_once "model/commande.php";
+require_once "model/detailCommande.php";
+require_once "model/avis.php";
 
 // Recuperer tous les produits pour Femmes
 function ctlModeFemmes(){
@@ -25,10 +26,11 @@ function ctlDetailProduit() {
     if (isset($_GET['id'])) {
         $id = (int) $_GET['id'];
         $produit = AvoirUnProduitParSonId($id);
+        $avis = AvoirAvisParProduit($id);
+        require_once "vues/detailProduit.php";
 
-        require "vues/detailProduit.php";
     } else {
-        header("loacation: index.php?action=accueil");
+        header("Location: index.php?action=accueil");
     }
 }
 

@@ -1,5 +1,5 @@
 <?php
-$titre = "Site e-commerce 2022-2023 : Détail du produit séléctionner (produits femmes)";
+$titre = "Site e-commerce 2022-2023 : Détail du produit séléctionner";
 ob_start();
 ?>
 
@@ -69,6 +69,89 @@ ob_start();
 <?php endif; ?>
 
 </div>
+
+<h3 class="mt-5">Avis des clients</h3>
+
+<?php if (empty($avis)) { ?>
+    <p>Aucun avis pour ce produit.</p>
+    
+<?php } else { ?>
+
+    <?php foreach ($avis as $a) { ?>
+        <div class="card mb-3">
+            <div class="card-body">
+
+                <h5>
+                    <?= htmlspecialchars($a['pseudo']) ?>
+                </h5>
+
+                <p>
+                    ⭐ <?= $a['note'] ?>/5
+                </p>
+
+                <p>
+                    <?= nl2br(htmlspecialchars($a['commentaire'])) ?>
+                </p>
+
+                <small class="text-muted">
+                    <?= $a['date'] ?>
+                </small>
+
+            </div>
+        </div>
+    <?php } ?>
+
+<?php } ?>
+<?php
+    $dejaAvis = false;
+
+    if (isset($_SESSION['user'])) {
+        $dejaAvis = AvisExisteDeja($_SESSION['user']->getIdUtilisateurs(), $produit->getId());
+    }
+?>
+<?php if (isset($_SESSION['user']) && !$dejaAvis) { ?>
+    <h4 class="mt-4">Ajouter un avis</h4>
+
+    <?php if (isset($_SESSION['user'])) { ?>
+
+        <form action="index.php?action=ajouter_avis" method="post">
+
+            <input type="hidden" name="id_produit" value="<?= $produit->getId() ?>">
+
+            <div class="mb-3">
+                <label class="form-label">Note</label>
+                <select name="note" class="form-select" required>
+                    <option value="">Choisir</option>
+                    <option value="1">1 ⭐</option>
+                    <option value="2">2 ⭐</option>
+                    <option value="3">3 ⭐</option>
+                    <option value="4">4 ⭐</option>
+                    <option value="5">5 ⭐</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Commentaire</label>
+                <textarea name="commentaire" class="form-control" required></textarea>
+            </div>
+
+            <button class="btn btn-primary">Envoyer</button>
+        </form>
+
+    <?php } elseif ($dejaAvis) { ?>
+        <?php if (isset($_GET['erreur']) && $_GET['erreur'] == 'deja_avis'){ ?>
+            <div class="alert alert-warning">
+                Vous avez déjà laisser un avis pour ce produit
+            </div>
+        <?php } else { ?>
+        <p>
+            <a href="index.php?action=connexion">Connectez-vous</a> pour laisser un avis.
+        </p>
+
+        <?php } ?>
+    <?php } ?>
+<?php } ?>
+
 
 <?php
 $contenu = ob_get_clean();

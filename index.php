@@ -1,5 +1,5 @@
 <?php
-require "model/utilisateurs.php";
+require_once "model/utilisateurs.php";
 
 session_start(); // emplacement obligatoire 
 
@@ -7,10 +7,11 @@ session_start(); // emplacement obligatoire
 date_default_timezone_set('Europe/Paris');
 
 // Import des controllers
-require "controller/ctlUtilisateur.php";
-require "controller/ctlProduits.php";
-require "controller/ctlAdministrateur.php";
-require "controller/ctlEnvoyerContact.php";
+require_once "controller/ctlUtilisateur.php";
+require_once "controller/ctlProduits.php";
+require_once "controller/ctlAdministrateur.php";
+require_once "controller/ctlEnvoyerContact.php";
+require_once "controller/ctlAvis.php";
 
 
 // Contenu Page d'accueil
@@ -191,6 +192,10 @@ if (isset($_GET['action'])) {
                 case 'Admin_SupprimerCommande';
                 ctlAdminSupprimerCommande();
                 break;
+            // Avis
+                case 'ajouter_avis';
+                    ctlAjouterAvis();
+                    break;
         default:
             header("location: index.php?action=accueil");
             break;

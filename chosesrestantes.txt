@@ -1,5 +1,5 @@
 Choses restantes a faire :
-
+(V1)
 - mise en place de la commande (fait)
 - détail de commande après validation (fait)
 - historique de commandes (fait)
@@ -12,7 +12,7 @@ Choses restantes a faire :
     - Supprimer une commande (fait)
     - Modifier uniquement le role d'un utilisateur (fait)
 - Mise en place d'un formulaire de contact qui envoie le message vers un mail spécifique (fait)
-- Faire tous le système des avis clients
+- Faire tous le système des avis clients 
 - Footer
 - Ajout de la possibilité de suppressions des commandes dans l'historique de commandes
 - Résoudre le problème de l'affichage du logo dans la barre de nav
@@ -23,10 +23,14 @@ Choses restantes a faire :
 - Modifier le boutton dans la page detail commande (Si ADMIN : redirection espace admin, si USER : redirection espace utilisateur ou historique commande)
 - refaire la page d'accueil (nouveauté, promos…)
 - Couleurs de l'interface
+- Ajouter boutton retour dans historique commande
 
-Idée de nouvelles fonctionnalités
+Idée de nouvelles fonctionnalités (V2) :
 - Faire un tri des produits pour les admin
 - Faire plusieurs satus des commandes : Comfirmée, en cours, terminées
 - Faire en sorte que le status soit mis a jour au niveau de la vue utilisateur
 - Mettre en place une platforme fictive de paiement
 - Tableaux stats coter admin
+- Amélioration du formulaire de contact :
+    - Faire un formulaire pour les utilisateurs connecter avec recuperation automatique des infos demandées (noms, pseudo, email)
+    - Garder le formulaire pour les utilisateur non connecté. 
