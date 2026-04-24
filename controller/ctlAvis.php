@@ -6,6 +6,7 @@ require_once "model/detailCommande.php";
 require_once "model/avis.php";
 require_once "model/utilisateurs.php";
 
+// Ajouter un avis
 function ctlAjouterAvis() {
     // Vérifier la connexion
     if (!isset($_SESSION['user'])) {
@@ -25,6 +26,27 @@ function ctlAjouterAvis() {
 
     AjoutAvis($idUser, $idProduit, $note, $commentaire);
 
+    header("Location: index.php?action=detail_produit&id=" . $idProduit);
+    exit();
+}
+// Modifier un avis
+function ctlModifierAvis() {
+    if (!isset($_GET['id'])) {
+        header("Location: index.php");
+        exit();
+    }
+    $idAvis = (int) $_GET['id'];
+    $avis = AvoirAvisParId($idAvis);
+    require_once "vues/modifierAvis.php";
+}
+// MAJ avis apres modif
+function ctlUpdateAvis() {
+    $idAvis = (int) $_POST['id_avis'];
+    $note = (int) $_POST['note'];
+    $commentaire = $_POST['commentaire'];
+    $idProduit = (int) $_POST['id_produit'];
+
+    ModifierAvis($idAvis, $note, $commentaire);
     header("Location: index.php?action=detail_produit&id=" . $idProduit);
     exit();
 }

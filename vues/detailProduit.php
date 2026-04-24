@@ -96,11 +96,14 @@ ob_start();
                 <small class="text-muted">
                     <?= $a['date'] ?>
                 </small>
-
             </div>
         </div>
+        <?php if (isset($_SESSION['user']) && $_SESSION['user']->getIdUtilisateurs() == $a['id_utilisateur']) { ?>
+            <a href="index.php?action=modifier_avis&id=<?= $a['id_avis'] ?>" class="btn btn-sm btn-warning">
+                Modifier
+            </a>
+        <?php } ?>
     <?php } ?>
-
 <?php } ?>
 <?php
     $dejaAvis = false;

@@ -12,7 +12,13 @@ Choses restantes a faire :
     - Supprimer une commande (fait)
     - Modifier uniquement le role d'un utilisateur (fait)
 - Mise en place d'un formulaire de contact qui envoie le message vers un mail spécifique (fait)
-- Faire tous le système des avis clients 
+- Faire tous le système des avis clients :
+24/04/26
+    - Ajouter un avis (fait)
+    - Limiter les avis a 1 par produits et par utilisateurs (fait)
+    - Modifier un avis (fait)
+    - Rajouter un boutton "annuler" qui redirige sur la page de detail du produit
+    - Supprimer un avis
 - Footer
 - Ajout de la possibilité de suppressions des commandes dans l'historique de commandes
 - Résoudre le problème de l'affichage du logo dans la barre de nav

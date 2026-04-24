@@ -230,11 +230,9 @@ function SupprimerAvisParId(int $idAvis): bool {
 
 // Modifier un avis par son id
 function ModifierAvis(int $idAvis,int $note, string $commentaire): bool {
-    $ret = false;
 
     $sqlReq = "UPDATE avis 
-               SET note = :note,
-                   commentaire = :commentaire,
+               SET note = :note, commentaire = :commentaire
                WHERE id_avis = :id_avis";
 
     try {
@@ -245,12 +243,27 @@ function ModifierAvis(int $idAvis,int $note, string $commentaire): bool {
         $req->bindValue(':commentaire', $commentaire, PDO::PARAM_STR);
         $req->bindValue(':id_avis', $idAvis, PDO::PARAM_INT);
 
-        $ret = $req->execute();
+        return $req->execute();
     }
     catch (Exception $ex) {
         var_dump($ex->getMessage());
+        return false;
     }
-    finally {
-        return $ret;
-    }   
+}
+// Avoir un avis par son id
+function AvoirAvisParId(int $idAvis) {
+    $sql = "SELECT * FROM avis WHERE id_avis = :id";
+    try {
+        $ctxBDD = ConnexionBDD();
+        $req = $ctxBDD->prepare($sql);
+        $req->bindValue(':id', $idAvis, PDO::PARAM_INT);
+        $req->execute();
+
+        $result = $req->fetch(PDO::FETCH_ASSOC);
+        return $result;
+
+    } catch (Exception $e) {
+        var_dump($e->getMessage());
+        return null;
+    }
 }

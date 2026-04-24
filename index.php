@@ -196,6 +196,12 @@ if (isset($_GET['action'])) {
                 case 'ajouter_avis';
                     ctlAjouterAvis();
                     break;
+                case 'modifier_avis';
+                    ctlModifierAvis();
+                    break;
+                case 'update_avis';
+                    ctlUpdateAvis();
+                    break;
         default:
             header("location: index.php?action=accueil");
             break;
