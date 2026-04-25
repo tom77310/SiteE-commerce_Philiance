@@ -17,8 +17,12 @@ Choses restantes a faire :
     - Ajouter un avis (fait)
     - Limiter les avis a 1 par produits et par utilisateurs (fait)
     - Modifier un avis (fait)
-    - Rajouter un boutton "annuler" qui redirige sur la page de detail du produit
-    - Supprimer un avis
+25/04/2026
+    - Rajouter un boutton "annuler" qui redirige sur la page de detail du produit (fait)
+    - Supprimer un avis (fait)
+    - Page "mes avis" coter utilisateur (fait)
+    - Faire en sorte qu'on admin ait le droit de supprimer n'importe quelle avis utilisateur (fait)
+
 - Footer
 - Ajout de la possibilité de suppressions des commandes dans l'historique de commandes
 - Résoudre le problème de l'affichage du logo dans la barre de nav
@@ -30,6 +34,9 @@ Choses restantes a faire :
 - refaire la page d'accueil (nouveauté, promos…)
 - Couleurs de l'interface
 - Ajouter boutton retour dans historique commande
+- Corriger la suppresion du compte utilisateur
+- Corriger la redirection du boutton annuler de la modif mot de passe utilisateur
+- Mettre des commentaires, reorganiser tous le code
 
 Idée de nouvelles fonctionnalités (V2) :
 - Faire un tri des produits pour les admin
@@ -40,3 +47,18 @@ Idée de nouvelles fonctionnalités (V2) :
 - Amélioration du formulaire de contact :
     - Faire un formulaire pour les utilisateurs connecter avec recuperation automatique des infos demandées (noms, pseudo, email)
     - Garder le formulaire pour les utilisateur non connecté. 
+- Afficher la moyenne des notes par produits
+    - dans les pages des produits
+    - dans la page "les stats" coter admin
+- Pouvoir trier les avis 
+    - dans les pages des produits
+    - dans une page dédiée coter admin
+- Faire en sorte qu'on puisse liker les avis
+- Empecher les mots insultants dans les avis
+- Faire en sorte qu'un admin uniquement puisse repondre a n'importe quel avis utilisateur
+- Pagination 
+    - Pages gestion utilisateurs
+    - Page gestion produits
+    - Page mes avis coter admin et utilisateur
+- Page Avis utilisateur coter admin
+- Coter admin : nombre d'avis en tout puis tableau comme pour la gestion des produit

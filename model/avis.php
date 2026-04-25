@@ -210,20 +210,18 @@ function AvoirAvisParProduit(int $idProduit): array {
 
 // supprimer un avis
 function SupprimerAvisParId(int $idAvis): bool {
-    $ret = false;
+
     $sqlReq = "DELETE FROM avis WHERE id_avis = :id_avis";
 
     try {
         $ctxBDD = ConnexionBDD();
         $req = $ctxBDD->prepare($sqlReq);
-        $req->bindValue(':id_avis', $idAvis);
-        $ret = $req->execute();
+        $req->bindValue(':id_avis', $idAvis, PDO::PARAM_INT);
+        return $req->execute();
     }
     catch (Exception $ex) {
         var_dump($ex->getMessage());
-    }
-    finally {
-        return $ret;
+        return false;
     }
 }
 
@@ -266,4 +264,26 @@ function AvoirAvisParId(int $idAvis) {
         var_dump($e->getMessage());
         return null;
     }
+}
+
+// Avoir l'avis par l'utilisateur
+function AvoirAvisParUtilisateur(int $idUtilisateur): array {
+    $avis = [];
+    $sqlReq = "SELECT a.*, p.nom_produit
+                FROM avis a
+                JOIN produit p ON a.id_produit = p.id_produit
+                WHERE a.id_utilisateur = :id_utilisateur
+                ORDER BY a.date DESC";
+    try {
+        $ctxBDD = ConnexionBDD();
+        $req = $ctxBDD->prepare($sqlReq);
+
+        $req->bindValue(':id_utilisateur', $idUtilisateur, PDO::PARAM_INT);
+        $req->execute();
+
+        $avis = $req->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $ex) {
+        var_dump($ex->getMessage());
+    }
+    return $avis;
 }

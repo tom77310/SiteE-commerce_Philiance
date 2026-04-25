@@ -9,6 +9,7 @@ ob_start();
 <form action="index.php?action=update_avis" method="post">
     <input type="hidden" name="id_avis" value="<?= $avis['id_avis'] ?>">
     <input type="hidden" name="id_produit" value="<?= $avis['id_produit'] ?>">
+    <input type="hidden" name="retour" value="<?= $_GET['retour'] ?? '' ?>">
 
     <div class="mb-3">
         <label>Note</label>
@@ -25,6 +26,7 @@ ob_start();
         <textarea name="commentaire" class="form-control"><?= htmlspecialchars($avis['commentaire']) ?></textarea>
     </div>
     <button class="btn btn-success">Modifier l'avis</button>
+    <button href="index.php?action=detail_produit&id=<?= $avis['id_produit'] ?>" class="btn btn-secondary">Annuler</button>
 </form>
 
 

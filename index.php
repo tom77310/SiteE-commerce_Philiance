@@ -78,7 +78,7 @@ if (isset($_GET['action'])) {
             case 'modifier_mot_de_passe':
             ctlModifierMotDePasse();
             break;
-
+            
             case 'modifier_mot_de_passe_traitement':
                 ctlModifierMotDePasseTraitement();
                 break;
@@ -90,7 +90,10 @@ if (isset($_GET['action'])) {
             case 'envoyer_contact';
             ctlEnvoyerContact();
             break;
-
+            // Page "Mes avis"
+            case 'mes_avis';
+                ctlMesAvis();
+                break;
         // Produits
             // Produits Femmes
                 case 'Produits_Femmes';
@@ -202,6 +205,10 @@ if (isset($_GET['action'])) {
                 case 'update_avis';
                     ctlUpdateAvis();
                     break;
+                case 'supprimer_avis';
+                    ctlSupprimerAvis();
+                    break;
+                
         default:
             header("location: index.php?action=accueil");
             break;

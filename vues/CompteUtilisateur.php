@@ -30,16 +30,21 @@ ob_start();
         </a>
     </div>
 
-    <!-- <form method="post" action="index.php?action=supprimer_compte" class="mt-4">
-        <button type="submit" class="btn btn-danger">
-            Supprimer mon compte
-        </button>
-    </form> -->
     <div class="col-md-6">
         <a href="index.php?action=historique_commandes" class="btn btn-outline-success w-100">
             📦 Historique des commandes
         </a>
     </div>
+    <div class="col-md-6">
+        <a href="index.php?action=mes_avis" class="btn btn-outline-info w-100">
+            ⭐ Mes Avis 
+        </a>
+    </div>
+    <!-- <form method="post" action="index.php?action=supprimer_compte" class="mt-4">
+        <button type="submit" class="btn btn-danger">
+            Supprimer mon compte
+        </button>
+    </form> -->
 
 <div class="card mt-4">
     <div class="card-body">

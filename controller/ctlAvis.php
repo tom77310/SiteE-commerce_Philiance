@@ -47,6 +47,64 @@ function ctlUpdateAvis() {
     $idProduit = (int) $_POST['id_produit'];
 
     ModifierAvis($idAvis, $note, $commentaire);
-    header("Location: index.php?action=detail_produit&id=" . $idProduit);
+
+    $retour = $_POST['retour'] ?? '';
+    if ($retour == 'mes_avis') {
+        header("Location: index.php?action=mes_avis");
+    }else{
+        header("Location: index.php?action=detail_produit&id=" . $idProduit);
+    }
     exit();
+}
+
+// Supprimer un avis
+function ctlSupprimerAvis() {
+    if (!isset($_GET['id'])) {
+        header("Location: index.php");
+        exit();
+    }
+    $idAvis = (int) $_GET['id'];
+    
+    // récupérer l'avis avant suppression
+    $avis = AvoirAvisParId($idAvis);
+
+    if (!$avis) {
+        header("Location: index.php");
+        exit();
+    }
+
+    // Sécurité : seul l'auteur de l'avis, peut le supprimer
+    if (!isset($_SESSION['user'])) {
+        header("Location:index.php");
+        exit();
+    }
+    $idUser = $_SESSION['user']->getIdUtilisateurs();
+    $role = $_SESSION['user']->getRole();
+
+    if ($idUser != $avis['id_utilsiateur'] && $role != 'admin') {
+       header("Location: index.php");
+       exit();
+    }
+
+    $idProduit = $avis['id_produit'];
+    SupprimerAvisParId($idAvis);
+    
+    $retour = $_GET['retour'] ?? '';
+
+    if ($retour == 'mes_avis') {
+        header("Location: index.php?action=mes_avis");
+    } else {
+        header("Location: index.php?action=detail_produit&id=" . $idProduit);
+    }
+    exit();
+}
+// fonction pour la page "mes avis" des utilisateurs
+function ctlMesAvis() {
+    if (!isset($_SESSION['user'])) {
+        header("Location: index.php?action=connexion");
+        exit();
+    }
+    $idUtilisateur = $_SESSION['user']->getIdUtilisateurs();
+    $avis = AvoirAvisParUtilisateur($idUtilisateur);
+    require_once "vues/MesAvis.php";
 }

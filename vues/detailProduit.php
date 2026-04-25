@@ -73,36 +73,55 @@ ob_start();
 <h3 class="mt-5">Avis des clients</h3>
 
 <?php if (empty($avis)) { ?>
+
     <p>Aucun avis pour ce produit.</p>
-    
+
 <?php } else { ?>
 
     <?php foreach ($avis as $a) { ?>
+
         <div class="card mb-3">
             <div class="card-body">
 
-                <h5>
-                    <?= htmlspecialchars($a['pseudo']) ?>
-                </h5>
+                <h5><?= htmlspecialchars($a['pseudo']) ?></h5>
 
-                <p>
-                    ⭐ <?= $a['note'] ?>/5
-                </p>
+                <p>⭐ <?= $a['note'] ?>/5 </p>
 
-                <p>
-                    <?= nl2br(htmlspecialchars($a['commentaire'])) ?>
-                </p>
+                <p> <?= nl2br(htmlspecialchars($a['commentaire'])) ?> </p>
 
                 <small class="text-muted">
                     <?= $a['date'] ?>
                 </small>
+
+                <?php
+                if (isset($_SESSION['user']) && ($_SESSION['user']->getIdUtilisateurs() == $a['id_utilisateur'] || $_SESSION['user']->getRole() == 'ADMIN')) { ?>
+                    <?php
+                    if (isset($_SESSION['user'])) {
+                        $isOwner = $_SESSION['user']->getIdUtilisateurs() == $a['id_utilisateur'];
+                        $isAdmin = strtoupper($_SESSION['user']->getRole()) == 'ADMIN';
+                    ?>
+                        <div class="mt-3">
+                            <?php if ($isOwner) { ?>
+                                <!-- USER : modifier + supprimer ses avis -->
+                                <a href="index.php?action=modifier_avis&id=<?= $a['id_avis'] ?>"
+                                class="btn btn-sm btn-warning">
+                                    Modifier mon avis
+                                </a>
+                            <?php } ?>
+
+                            <?php if ($isOwner || $isAdmin) { ?>
+                                <!-- USER + ADMIN : suppression -->
+                                <a href="index.php?action=supprimer_avis&id=<?= $a['id_avis'] ?>"
+                                class="btn btn-sm btn-danger"
+                                onclick="return confirm('Voulez-vous vraiment supprimer cet avis ?')">
+                                    Supprimer l'avis
+                                </a>
+                            <?php } ?>
+                        </div>
+                    <?php } ?>
+                <?php } ?>
             </div>
         </div>
-        <?php if (isset($_SESSION['user']) && $_SESSION['user']->getIdUtilisateurs() == $a['id_utilisateur']) { ?>
-            <a href="index.php?action=modifier_avis&id=<?= $a['id_avis'] ?>" class="btn btn-sm btn-warning">
-                Modifier
-            </a>
-        <?php } ?>
     <?php } ?>
 <?php } ?>
 <?php
