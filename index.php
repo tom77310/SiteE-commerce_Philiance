@@ -12,6 +12,7 @@ require_once "controller/ctlProduits.php";
 require_once "controller/ctlAdministrateur.php";
 require_once "controller/ctlEnvoyerContact.php";
 require_once "controller/ctlAvis.php";
+require_once "controller/ctlFooter.php";
 
 
 // Contenu Page d'accueil
@@ -208,7 +209,25 @@ if (isset($_GET['action'])) {
                 case 'supprimer_avis';
                     ctlSupprimerAvis();
                     break;
-                
+            // Footer
+                case 'mentions_legales':
+                ctlMentionsLegales();
+                break;
+                case 'cgv':
+                ctlCGV();
+                break;
+                case 'cgu':
+                ctlCGU();
+                break;
+                case 'confidentialite':
+                ctlConfidentialite();
+                break;
+                case 'rgpd':
+                ctlRGPD();
+                break;
+                case 'apropos':
+                ctlAPropos();
+                break;
         default:
             header("location: index.php?action=accueil");
             break;

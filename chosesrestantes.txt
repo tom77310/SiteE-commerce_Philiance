@@ -22,8 +22,16 @@ Choses restantes a faire :
     - Supprimer un avis (fait)
     - Page "mes avis" coter utilisateur (fait)
     - Faire en sorte qu'on admin ait le droit de supprimer n'importe quelle avis utilisateur (fait)
-
-- Footer
+02/05/2026
+- Footer (fait)
+    - lien du footer :
+        - CGV (fait)
+        - CGU (fait)
+        - Mentions Légales (fait)
+        - Politique de confidentialité (fait)
+        - RGPD (fait)
+        - A Propos (fait)
+        - Formulaire de contact (initialement dans la nav) (fait)
 - Ajout de la possibilité de suppressions des commandes dans l'historique de commandes
 - Résoudre le problème de l'affichage du logo dans la barre de nav
 - refaire le design des formulaires d'inscription et de connexion
@@ -31,12 +39,13 @@ Choses restantes a faire :
 - Sécurité des URL en fonction du role 
 - Enlever le bouton d'ajout de panier pour les admin
 - Modifier le boutton dans la page detail commande (Si ADMIN : redirection espace admin, si USER : redirection espace utilisateur ou historique commande)
-- refaire la page d'accueil (nouveauté, promos…)
+- refaire la page d'accueil (nouveauté, promos, ajouts récents, …)
 - Couleurs de l'interface
 - Ajouter boutton retour dans historique commande
 - Corriger la suppresion du compte utilisateur
 - Corriger la redirection du boutton annuler de la modif mot de passe utilisateur
-- Mettre des commentaires, reorganiser tous le code
+- Mettre des commentaires dans le code, reorganiser tous le code
+- Trouver un nom au site
 
 Idée de nouvelles fonctionnalités (V2) :
 - Faire un tri des produits pour les admin
