@@ -4,7 +4,7 @@ ob_start();
 ?>
 
 <div class="container mt-5">
-    <h2>Mes commandes</h2>
+    <h2 class="text-center text-decoration-underline">Mes commandes</h2>
 
     <?php if (empty($commandes)) : ?>
         <p>Vous n'avez encore passé aucune commande.</p>
@@ -26,13 +26,20 @@ ob_start();
                         <td><?= htmlspecialchars($commande->getReference()) ?></td>
                         <td><?= $commande->getMontant() ?> €</td>
                         <td><?= $commande->getDate()->format("d/m/Y H:i") ?></td>
-                        <td><a href="index.php?action=recap_commande&id=<?= $commande->getIdCommande() ?>" class= "btn btn-sm btn-primary"> Voir</a></td>
+                        <td>
+                            <a href="index.php?action=recap_commande&id=<?= $commande->getIdCommande() ?>" class= "btn btn-sm btn-primary"> Voir</a>
+                            <a href="index.php?action=supprimer_commande&id=<?= $commande->getIdCommande() ?>" 
+                                class= "btn btn-sm btn-danger"
+                                onclick="return confirm('Voulez-vous vraiment supprimer cette commande ?')">
+                                Supprimer
+                            </a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     <?php endif ?>
-
+<a href="index.php?action=utilisateur_compte" class="btn btn-sm btn-primary">Retour</a>
 </div>
 
 <?php

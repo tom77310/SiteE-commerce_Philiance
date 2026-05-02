@@ -193,8 +193,12 @@ if (isset($_GET['action'])) {
                 ctlAdminCommandes();
                 break;
                 // Supprimer une commande (coter admin)
-                case 'Admin_SupprimerCommande';
+                case 'Admin_SupprimerCommande':
                 ctlAdminSupprimerCommande();
+                break;
+                // Supprimer une commande dans l'historique de commande (coter user)
+                case 'supprimer_commande':
+                ctlSupprimerCommandeUtilisateur();
                 break;
             // Avis
                 case 'ajouter_avis';

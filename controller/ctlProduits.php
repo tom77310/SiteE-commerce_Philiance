@@ -204,4 +204,32 @@ function ctlHistoriqueCommandesUtilisateurs(){
     // et on charge la vue
     require "vues/historiqueCommandes.php";
 }
+
+// Supprimer une commande dans l'historique de commandes dans l'espace utilisateur
+function ctlSupprimerCommandeUtilisateur() {
+    if (!isset($_SESSION['user'])) {
+        header("Location: index.php?action=utilisateur_connexion");
+        exit();
+    }
+    if (!isset($_GET['id'])) {
+        header("Location: index.php?action=historique_commandes");
+        exit();
+    }
+
+    $idCommande = (int) $_GET['id'];
+    $idUtilisateur = $_SESSION['user']->getIdUtilisateurs();
+
+    // Sécurité : vérifier que la commande appartient à l'utilisateur
+    $commande = RecupererUneCommandeParId($idCommande);
+
+    if (!$commande || $commande->getIdUtilisateur() != $idUtilisateur) {
+        header("Location: index.php?action=historique_commandes");
+        exit();
+    }
+
+    SupprimerCommandeParId($idCommande);
+
+    header("Location: index.php?action=historique_commandes");
+    exit();
+}
 ?>

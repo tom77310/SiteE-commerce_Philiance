@@ -18,7 +18,7 @@ $role = $isConnected ? $_SESSION['user']->getRole() : null;
 
     <!-- Logo -->
     <a class="navbar-brand" href="index.php?action=accueil">
-      <img src="../img/logo2.png" alt="Logo du site" class="logo">
+      <img src="./assets/Logo/logo2.png" alt="Logo du site" class="logo">
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
