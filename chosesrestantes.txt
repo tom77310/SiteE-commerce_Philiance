@@ -36,8 +36,8 @@ Choses restantes a faire :
 - Ajouter boutton retour dans historique commande (fait)
 - Corriger la position du footer (fait)
 - Résoudre le problème de l'affichage du logo dans la barre de nav (fait)
-
-- refaire le design des formulaires d'inscription et de connexion
+06/05/2026
+- refaire le design des formulaires d'inscription et de connexion (fait)
 - dysfonctionnement modif -> la date de naissance n'est pas modifiable pour l'instant
 - Enlever le bouton d'ajout de panier pour les admin
 - Modifier le boutton dans la page detail commande (Si ADMIN : redirection espace admin, si USER : redirection espace utilisateur ou historique commande)
@@ -79,3 +79,6 @@ Idée de nouvelles fonctionnalités (V2) :
     - Garçon
     - Bébé
 - Faire en sorte qu'on puisse annulé une commande dans l'historique de commande
+- Faire en sorte de msquer/afficher le mot de passe dans les formulaires inscription/connexion
+- Ajouter un champs de comfirmation de mdp dans les formulaires de connexion/inscription
+- Checkbox RGPD dans les formulaires inscription/connexion
