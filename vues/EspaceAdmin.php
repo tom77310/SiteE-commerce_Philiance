@@ -1,6 +1,11 @@
 <?php
 $titre = "Site e-commerce 2022-2023 : Espace Administrateur";
 ob_start();
+/**
+ * @var int $nbProduits
+ * @var int $nbUtilisateurs
+ * @var int $nbCommandes
+ */ // Enleve l'erreur Visuel de VSCode sur les variables
 ?>
 
 <h1 class="mb-4">Tableau de bord Administrateur</h1>

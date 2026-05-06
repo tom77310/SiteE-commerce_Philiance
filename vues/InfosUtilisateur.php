@@ -1,6 +1,8 @@
 <?php
 $titre = "Site e-commerce 2022-2023 : Mes informations";
 ob_start();
+
+/** @var Utilisateurs $utilisateur */ // Evite l'erreur visuel de VSCode sur les variables
 ?>
 
 <h1 class="mb-4">Mes informations personnelles</h1>

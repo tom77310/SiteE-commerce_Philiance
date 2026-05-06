@@ -1,6 +1,8 @@
 <?php
 $titre = "Site e-commerce 2022-2023 : Mon compte";
 ob_start();
+
+/** @var Utilisateurs $utilisateur */ // Evite l'erreur visuel de VSCode sur les variables
 ?>
 
 <h1 class="mb-4">Mon espace utilisateur</h1>
@@ -40,11 +42,19 @@ ob_start();
             ⭐ Mes Avis 
         </a>
     </div>
-    <!-- <form method="post" action="index.php?action=supprimer_compte" class="mt-4">
-        <button type="submit" class="btn btn-danger">
+    <form method="post" action="index.php?action=supprimer_compte" class="mt-4">
+
+        <div class="mb-3">
+            <label class="form-label">Confirmer votre mot de passe</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-danger"
+            onclick="return confirm('Voulez-vous vraiment supprimer votre compte ?');">
             Supprimer mon compte
         </button>
-    </form> -->
+
+    </form>
 
 <div class="card mt-4">
     <div class="card-body">

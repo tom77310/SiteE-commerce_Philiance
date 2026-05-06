@@ -139,64 +139,48 @@ function ctlModifierCompteTraitement() {
     header("Location: index.php?action=utilisateur_compte");
     exit();
 }
-
-// Suppression de compte utilisateur avec verif mot de passe
+// Supprimer le compte
 function ctlSupprimerCompte() {
 
-    // =========================
-    // 1️⃣ Sécurité : utilisateur connecté
-    // =========================
     if (!isset($_SESSION['user'])) {
         header("Location: index.php?action=utilisateur_connexion");
         exit();
     }
 
-    // =========================
-    // 2️⃣ Sécurité : POST uniquement
-    // =========================
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         header("Location: index.php?action=utilisateur_compte");
         exit();
     }
 
-    // =========================
-    // 3️⃣ Récupération utilisateur + mot de passe
-    // =========================
     $utilisateur = $_SESSION['user'];
     $password = $_POST['password'] ?? '';
 
-    // Si le champ est vide → refus
     if (empty($password)) {
         header("Location: index.php?action=utilisateur_compte");
         exit();
     }
 
-    // =========================
-    // 4️⃣ Vérification du mot de passe
-    // =========================
-    // getMotDePasse() doit retourner le hash stocké en base
     if (!password_verify($password, $utilisateur->getMotDePasse())) {
-        // Mot de passe incorrect → retour sans suppression
         header("Location: index.php?action=utilisateur_compte");
         exit();
     }
 
-    // =========================
-    // 5️⃣ Suppression du compte
-    // =========================
-    $ok = SupprimerUtilisateurParId($utilisateur->getIdUtilisateurs());
+    // suppression en base
+    SupprimerUtilisateurParId($utilisateur->getIdUtilisateurs());
 
-    // =========================
-    // 6️⃣ Déconnexion propre
-    // =========================
-    if ($ok) {
-        session_unset();
-        session_destroy();
+    // destruction session immédiate
+    $_SESSION = [];
+
+    if (ini_get("session.use_cookies")) {
+        $params = session_get_cookie_params();
+        setcookie(session_name(), '', time() - 42000,
+            $params["path"], $params["domain"],
+            $params["secure"], $params["httponly"]
+        );
     }
 
-    // =========================
-    // 7️⃣ Redirection finale
-    // =========================
+    session_destroy();
+
     header("Location: index.php?action=accueil");
     exit();
 }

@@ -1,6 +1,7 @@
 <?php
 $titre = "Site e-commerce 2022-2023 : Admin - Liste des Utilisateurs";
 ob_start();
+/** @var Utilisateurs $utilisateurs */ // Evite l'erreur visuel de VSCode sur les variables
 ?>
 
 <h1 class="mb-4">Gestion des Utilisateurs</h1>

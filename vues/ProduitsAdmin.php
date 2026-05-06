@@ -1,6 +1,8 @@
 <?php
 $titre = "Site e-commerce 2022-2023 : Gestion des Produits";
 ob_start();
+
+/** @var Produit $produits */ // Evite l'erreur visuel de VSCode sur les variables
 ?>
 
 <h1 class="mb-4">Gestion des produits</h1>

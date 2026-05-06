@@ -1,6 +1,9 @@
 <?php
 $titre = "Site e-commerce 2022-2023: Formulaire Modifier un produit";
 ob_start();
+
+
+/** @var Produit $produit */ // Evite l'erreur visuel de VSCode sur les variables
 ?>
 
 <h1 class="mb-4">Modifier le produit sélectionné</h1>

@@ -44,7 +44,7 @@ ob_start();
         Enregistrer
     </button>
 
-    <a href="index.php?action=espace_utilisateur" class="btn btn-secondary ms-2">
+    <a href="index.php?action=utilisateur_compte" class="btn btn-secondary ms-2">
         Annuler
     </a>
 </form>
@@ -52,3 +52,4 @@ ob_start();
 <?php
 $contenu = ob_get_clean();
 require "vues/template.php";
+?>

@@ -13,22 +13,8 @@ require_once "controller/ctlAdministrateur.php";
 require_once "controller/ctlEnvoyerContact.php";
 require_once "controller/ctlAvis.php";
 require_once "controller/ctlFooter.php";
+require_once "controller/ctlDefaut.php";
 
-
-// Contenu Page d'accueil
-function accueil() {
-    $titre = "Site e-commerce 2022-2023";
-
-    ob_start();
-    ?>
-
-<!-- Texte Page d'accueil HTML -->
-<h1 class="text-center mt-5">Bienvenue sur notre E-commerce</h1>
-
-<?php
-    $contenu = ob_get_clean();
-    require "vues/template.php";
-}
 
 // ROUTEUR
 if (isset($_GET['action'])) {
@@ -44,7 +30,7 @@ if (isset($_GET['action'])) {
     switch ($action) {
         // Page d'accueil
         case 'accueil':
-            accueil();
+            ctlaccueil();
             break;
         // Utilisateur
             // Inscription

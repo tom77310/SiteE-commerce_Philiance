@@ -41,9 +41,18 @@ Choses restantes a faire :
 - dysfonctionnement modif -> la date de naissance n'est pas modifiable pour l'instant (fait)
 - Enlever le bouton d'ajout de panier pour les admin (fait)
 - Modifier le boutton dans la page detail commande (Si ADMIN : redirection espace admin, si USER : redirection espace utilisateur ou historique commande) (fait)
-- Corriger la suppresion du compte utilisateur 
-- Corriger la redirection du boutton annuler de la modif mot de passe utilisateur
-- refaire la page d'accueil (nouveauté, promos, ajouts récents, avis des utilisateurs sur le site)
+- Corriger la suppresion du compte utilisateur (fait)
+- Corriger la redirection du boutton annuler de la modif mot de passe utilisateur (fait)
+- refaire la page d'accueil (nouveauté, promos, produits populaire, avis des utilisateurs sur le site) :
+    - Section nouveauté :
+        - rajouter un champ dataAjout dans le model Produit
+        - rajouter une methode qui recupèrent les produit en fonction de la date d'ajout
+        - Limité la date : au bout d'un certain nombre de jours l'article n'est plus considéré comme nouveau, et s'enleve de la section nouveauté de la page d'accueil
+    - Section promos :
+        - faire en sorte que dès que je baisse le prix de base, l'article va dans la section promo de la page d'accueil
+        - rajouter une methode qui recupere le prix dans le model Produit
+    - Avis récents :
+        - rajouter une méthode pour récupérér les derniers avis des utilisateurs
 - Couleurs de l'interface
 - Sécurité des URL en fonction du role et sécurité générale du site
 - Mettre des commentaires dans le code, reorganiser tous le code
