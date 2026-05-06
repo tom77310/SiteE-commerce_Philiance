@@ -76,12 +76,9 @@ ob_start();
     </a>
 <?php endif; ?>
 <?php if (!empty($produitsPanier)) : ?>
-    <a 
-        href="index.php?action=valider_panier" 
-        class="btn btn-success mt-3 ms-2"
-    >
-        Valider le panier
-    </a>
+<a href="index.php?action=valider_panier&source=panier" class="btn btn-success mt-3 ms-2">
+    Valider le panier
+</a>
 <?php endif; ?>
 
 </div>

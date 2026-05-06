@@ -34,107 +34,103 @@ ob_start();
                 case 'enfant':
                     $retour = "Produits_Enfants";
                     break;
-                
                 default:
                     $retour = "accueil";
                     break;
             }
         ?>
+
             <a href="index.php?action=<?= $retour ?>" class="btn btn-secondary mt-3">
                 Retour aux produits
             </a>
+
+            <!-- BOUTON PANIER -->
+            <?php if (isset($_SESSION['user'])) : ?>
+
+                <?php if (strtoupper($_SESSION['user']->getRole()) === 'USER') : ?>
+                    <a href="index.php?action=Produit_Ajout&id=<?= $produit->getId() ?>" class="btn btn-success mt-2">
+                        Ajouter au panier
+                    </a>
+                <?php endif; ?>
+
+            <?php else : ?>
+
+                <a href="index.php?action=utilisateur_connexion" class="btn btn-warning mt-2">
+                    Connectez-vous ou inscrivez-vous pour ajouter cet article au panier
+                </a>
+
+            <?php endif; ?>
+
         </div>
-
     </div>
-   <?php if (isset($_SESSION['user'])) : ?>
 
-    <?php if (
-        $_SESSION['user']->getRole() === 'USER' ||
-        $_SESSION['user']->getRole() === 'ADMIN'
-    ) : ?>
+    <h3 class="mt-5">Avis des clients</h3>
 
-        <a href="index.php?action=Produit_Ajout&id=<?= $produit->getId() ?>" class="btn btn-success mt-2">
-            Ajouter au panier
-        </a>
+    <?php if (empty($avis)) { ?>
 
+        <p>Aucun avis pour ce produit.</p>
 
-    <?php endif; ?>
+    <?php } else { ?>
 
-<?php else : ?>
+        <?php foreach ($avis as $a) { ?>
 
-    <a href="index.php?action=utilisateur_connexion" class="btn btn-warning mt-2">
-        Connectez-vous ou inscrivez-vous pour ajouter cet article au panier
-    </a>
+            <div class="card mb-3">
+                <div class="card-body">
 
-<?php endif; ?>
+                    <h5><?= htmlspecialchars($a['pseudo']) ?></h5>
 
-</div>
+                    <p>⭐ <?= $a['note'] ?>/5 </p>
 
-<h3 class="mt-5">Avis des clients</h3>
+                    <p><?= nl2br(htmlspecialchars($a['commentaire'])) ?></p>
 
-<?php if (empty($avis)) { ?>
+                    <small class="text-muted">
+                        <?= $a['date'] ?>
+                    </small>
 
-    <p>Aucun avis pour ce produit.</p>
-
-<?php } else { ?>
-
-    <?php foreach ($avis as $a) { ?>
-
-        <div class="card mb-3">
-            <div class="card-body">
-
-                <h5><?= htmlspecialchars($a['pseudo']) ?></h5>
-
-                <p>⭐ <?= $a['note'] ?>/5 </p>
-
-                <p> <?= nl2br(htmlspecialchars($a['commentaire'])) ?> </p>
-
-                <small class="text-muted">
-                    <?= $a['date'] ?>
-                </small>
-
-                <?php
-                if (isset($_SESSION['user']) && ($_SESSION['user']->getIdUtilisateurs() == $a['id_utilisateur'] || $_SESSION['user']->getRole() == 'ADMIN')) { ?>
                     <?php
                     if (isset($_SESSION['user'])) {
                         $isOwner = $_SESSION['user']->getIdUtilisateurs() == $a['id_utilisateur'];
                         $isAdmin = strtoupper($_SESSION['user']->getRole()) == 'ADMIN';
                     ?>
-                        <div class="mt-3">
-                            <?php if ($isOwner) { ?>
-                                <!-- USER : modifier + supprimer ses avis -->
-                                <a href="index.php?action=modifier_avis&id=<?= $a['id_avis'] ?>"
-                                class="btn btn-sm btn-warning">
-                                    Modifier mon avis
-                                </a>
-                            <?php } ?>
 
-                            <?php if ($isOwner || $isAdmin) { ?>
-                                <!-- USER + ADMIN : suppression -->
+                        <?php if ($isOwner || $isAdmin) { ?>
+                            <div class="mt-3">
+
+                                <?php if ($isOwner) { ?>
+                                    <a href="index.php?action=modifier_avis&id=<?= $a['id_avis'] ?>"
+                                       class="btn btn-sm btn-warning">
+                                        Modifier mon avis
+                                    </a>
+                                <?php } ?>
+
                                 <a href="index.php?action=supprimer_avis&id=<?= $a['id_avis'] ?>"
-                                class="btn btn-sm btn-danger"
-                                onclick="return confirm('Voulez-vous vraiment supprimer cet avis ?')">
+                                   class="btn btn-sm btn-danger"
+                                   onclick="return confirm('Voulez-vous vraiment supprimer cet avis ?')">
                                     Supprimer l'avis
                                 </a>
-                            <?php } ?>
-                        </div>
+
+                            </div>
+                        <?php } ?>
+
                     <?php } ?>
-                <?php } ?>
+
+                </div>
             </div>
-        </div>
+
+        <?php } ?>
     <?php } ?>
-<?php } ?>
-<?php
-    $dejaAvis = false;
 
-    if (isset($_SESSION['user'])) {
-        $dejaAvis = AvisExisteDeja($_SESSION['user']->getIdUtilisateurs(), $produit->getId());
-    }
-?>
-<?php if (isset($_SESSION['user']) && !$dejaAvis) { ?>
-    <h4 class="mt-4">Ajouter un avis</h4>
+    <?php
+        $dejaAvis = false;
 
-    <?php if (isset($_SESSION['user'])) { ?>
+        if (isset($_SESSION['user'])) {
+            $dejaAvis = AvisExisteDeja($_SESSION['user']->getIdUtilisateurs(), $produit->getId());
+        }
+    ?>
+
+    <?php if (isset($_SESSION['user']) && !$dejaAvis) { ?>
+
+        <h4 class="mt-4">Ajouter un avis</h4>
 
         <form action="index.php?action=ajouter_avis" method="post">
 
@@ -160,20 +156,9 @@ ob_start();
             <button class="btn btn-primary">Envoyer</button>
         </form>
 
-    <?php } elseif ($dejaAvis) { ?>
-        <?php if (isset($_GET['erreur']) && $_GET['erreur'] == 'deja_avis'){ ?>
-            <div class="alert alert-warning">
-                Vous avez déjà laisser un avis pour ce produit
-            </div>
-        <?php } else { ?>
-        <p>
-            <a href="index.php?action=connexion">Connectez-vous</a> pour laisser un avis.
-        </p>
-
-        <?php } ?>
     <?php } ?>
-<?php } ?>
 
+</div>
 
 <?php
 $contenu = ob_get_clean();

@@ -46,8 +46,23 @@ $commande = RecupererUneCommandeParId($idCommande);
 
     <h4>Total Payé : <?= $commande->getMontant(); ?> €</h4>
 
-    <a href="index.php?action=accueil" class="btn btn-primary mt-3">
-        Retour a l'accueil
+    <?php
+        $redirect = "index.php?action=accueil";
+
+        if (isset($_SESSION['user'])) {
+            $role = strtoupper($_SESSION['user']->getRole());
+
+            if ($role === 'ADMIN') {
+                $redirect = "index.php?action=Admin_ListeCommandes";
+            } elseif (isset($_GET['source']) && $_GET['source'] === 'panier') {
+                $redirect = "index.php?action=utilisateur_compte";
+            } else {
+                $redirect = "index.php?action=historique_commandes";
+            }
+        }
+    ?>
+    <a href="<?= $redirect ?>" class="btn btn-primary mt-3">
+        Retour
     </a>
 
 </div>

@@ -40,7 +40,7 @@ ob_start();
                         <td><?= number_format($commande['montant'],2) ?>€</td>
                         <td><?= date("d/m/Y H:i", strtotime($commande['date'])) ?></td>
                         <td>
-                            <a href="index.php?action=recap_commande&id=<?= $commande['id_commande'] ?>" class="btn btn-sm btn-primary">
+                            <a href="index.php?action=recap_commande&id=<?= $commande['id_commande'] ?>&source=admin" class="btn btn-sm btn-primary">
                                 Voir
                             </a>
                             <a href="index.php?action=Admin_SupprimerCommande&id=<?= $commande['id_commande'] ?>" class="btn btn-sm btn-danger"

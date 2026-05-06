@@ -27,7 +27,7 @@ ob_start();
                         <td><?= $commande->getMontant() ?> €</td>
                         <td><?= $commande->getDate()->format("d/m/Y H:i") ?></td>
                         <td>
-                            <a href="index.php?action=recap_commande&id=<?= $commande->getIdCommande() ?>" class= "btn btn-sm btn-primary"> Voir</a>
+                            <a href="index.php?action=recap_commande&id=<?= $commande->getIdCommande() ?>&source=historique" class= "btn btn-sm btn-primary"> Voir</a>
                             <a href="index.php?action=supprimer_commande&id=<?= $commande->getIdCommande() ?>" 
                                 class= "btn btn-sm btn-danger"
                                 onclick="return confirm('Voulez-vous vraiment supprimer cette commande ?')">

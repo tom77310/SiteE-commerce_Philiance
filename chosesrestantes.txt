@@ -38,13 +38,13 @@ Choses restantes a faire :
 - Résoudre le problème de l'affichage du logo dans la barre de nav (fait)
 06/05/2026
 - refaire le design des formulaires d'inscription et de connexion (fait)
-- dysfonctionnement modif -> la date de naissance n'est pas modifiable pour l'instant
-- Enlever le bouton d'ajout de panier pour les admin
-- Modifier le boutton dans la page detail commande (Si ADMIN : redirection espace admin, si USER : redirection espace utilisateur ou historique commande)
+- dysfonctionnement modif -> la date de naissance n'est pas modifiable pour l'instant (fait)
+- Enlever le bouton d'ajout de panier pour les admin (fait)
+- Modifier le boutton dans la page detail commande (Si ADMIN : redirection espace admin, si USER : redirection espace utilisateur ou historique commande) (fait)
+- Corriger la suppresion du compte utilisateur 
+- Corriger la redirection du boutton annuler de la modif mot de passe utilisateur
 - refaire la page d'accueil (nouveauté, promos, ajouts récents, avis des utilisateurs sur le site)
 - Couleurs de l'interface
-- Corriger la suppresion du compte utilisateur
-- Corriger la redirection du boutton annuler de la modif mot de passe utilisateur
 - Sécurité des URL en fonction du role et sécurité générale du site
 - Mettre des commentaires dans le code, reorganiser tous le code
 - Trouver un nom au site
