@@ -65,12 +65,19 @@ ob_start();
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Prix</label>
+                <label class="form-label">Prix (euros) </label>
                 <input type="number" 
                         name="prix" 
                         class="form-control"
                         step="0.01"
-                        value="<?= $produit->getPrix() ?>"> €
+                        value="<?= $produit->getPrix() ?>">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Date d'ajout</label>
+                <input type="date" 
+                        name="dateAjout" 
+                        class="form-control"
+                        value="<?= $produit->getDateAjout() ?>">
             </div>
             <button class="btn btn-success">
                 Enregistrer les modifications

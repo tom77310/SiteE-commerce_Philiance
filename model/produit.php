@@ -9,7 +9,9 @@ class Produit{
     private string $type_vetement;
     private string $categorie_vetement;
     private float $prix;
+    private ?float $prixPromo = null;
     private string $image;
+    private string $dateAjout;
 
     
     /**
@@ -139,6 +141,23 @@ class Produit{
     }
 
     /**
+     * Get the value of prixPromo
+     */
+    public function getPrixPromo(): float
+    {
+        return $this->prixPromo;
+    }
+
+    /**
+     * Set the value of prix
+     */
+    public function setPrixPromo(?float $prixPromo): self
+    {
+        $this->prixPromo = $prixPromo;
+        return $this;
+    }
+
+    /**
      * Get the value of image
      */
     public function getImage(): string
@@ -152,6 +171,22 @@ class Produit{
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+     /**
+     * Get the value of dateAjout
+     */
+    public function getDateAjout(): string
+    {
+        return $this->dateAjout;
+    }
+     /**
+     * Set the value of dateAjout
+     */
+    public function setDateAjout(string $dateAjout): self
+    {
+        $this->dateAjout = $dateAjout;
 
         return $this;
     }
@@ -235,8 +270,8 @@ function SupprimerProduit(int $id) {
 }
 
 // Modifier un produit
-function ModifierProduit($id, $nom, $taille, $sexe, $type, $categorie, $prix, $image) {
-    $sqlReq = "UPDATE produit SET nom_produit = :nom, taille = :taille, sexe = :sexe, type_vetement = :type, categorie_vetement = :categorie, prix = :prix, image = :image
+function ModifierProduit(int $id, string $nom, string $taille, string $sexe, string $type, string $categorie, float $prix, string $image, string $dateAjout) {
+    $sqlReq = "UPDATE produit SET nom_produit = :nom, taille = :taille, sexe = :sexe, type_vetement = :type, categorie_vetement = :categorie, prix = :prix, image = :image, dateAjout = :dateAjout
                 WHERE id_produit = :id";
     
     try {
@@ -251,6 +286,7 @@ function ModifierProduit($id, $nom, $taille, $sexe, $type, $categorie, $prix, $i
         $req->bindValue(':categorie', $categorie);
         $req->bindValue(':prix', $prix);
         $req->bindValue(':image', $image);
+        $req->bindValue(':dateAjout', $dateAjout);
 
         $req->execute();
     } catch (Exception $ex) {
@@ -306,5 +342,93 @@ function RecupererProduitEnfants() {
         die();
     }finally{
         return $produitEnfants;
+    }
+}
+
+// Recupérer les nouveautés pour la page d'accueil
+function RecupererNouveautes($limite = 4) {
+
+    $nouveautes = [];
+
+    $sqlReq = "SELECT *
+               FROM produit
+               WHERE dateAjout >= DATE_SUB(NOW(), INTERVAL 7 DAY)
+               ORDER BY dateAjout DESC
+               LIMIT $limite";
+
+    try {
+
+        $ctxBDD = ConnexionBDD();
+        $req = $ctxBDD->query($sqlReq);
+
+        $req->setFetchMode(PDO::FETCH_CLASS, 'Produit');
+
+        $nouveautes = $req->fetchAll();
+
+    } catch (Exception $ex) {
+        var_dump($ex->getMessage());
+        die();
+    }
+
+    return $nouveautes;
+}
+
+// Recuperer les produits en promo
+function RecupererProduitsEnPromo($limite = 4)
+{
+    $promotions = [];
+
+    $sqlReq = "SELECT *
+               FROM produit
+               WHERE prixPromo IS NOT NULL
+               AND prixPromo < prix
+               ORDER BY dateAjout DESC
+               LIMIT $limite";
+
+    try {
+
+        $ctxBDD = ConnexionBDD();
+        $req = $ctxBDD->query($sqlReq);
+
+        $req->setFetchMode(PDO::FETCH_CLASS, 'Produit');
+
+        $promotions = $req->fetchAll();
+
+    } catch (Exception $ex) {
+        var_dump($ex->getMessage());
+        die();
+    }
+
+    return $promotions;
+}
+
+// Modifier prix en promo
+function ModifierPrixProduit(int $id, float $prix,  $prixPromo = null)
+{
+    $sqlReq = "UPDATE produit
+               SET prix = :prix,
+                   prixPromo = :prixPromo
+               WHERE id = :id";
+
+    try {
+
+        $ctxBDD = ConnexionBDD();
+        $req = $ctxBDD->prepare($sqlReq);
+
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->bindValue(':prix', $prix);
+
+        // si pas de promo → NULL en base
+        if ($prixPromo === null || $prixPromo === '') {
+            $req->bindValue(':prixPromo', null, PDO::PARAM_NULL);
+        } else {
+            $req->bindValue(':prixPromo', $prixPromo);
+        }
+
+        return $req->execute();
+
+    } catch (Exception $ex) {
+        var_dump($ex->getMessage());
+        die();
     }
 }

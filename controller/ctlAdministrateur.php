@@ -109,6 +109,7 @@ function ctlAdminUpdateProduit(){
     $type = $_POST['type_vetement'];
     $categorie = $_POST['categorie_vetement'];
     $prix = $_POST['prix'];
+    $dateAjout = $_POST['dateAjout'];
 
     $imageNom = $_POST['ancienne_image'];
 
@@ -138,7 +139,7 @@ function ctlAdminUpdateProduit(){
         );
     }
 
-    ModifierProduit($id, $nom, $taille, $sexe, $type, $categorie, $prix, $imageNom );
+    ModifierProduit($id, $nom, $taille, $sexe, $type, $categorie, $prix, $imageNom, $dateAjout );
 
     header("Location: index.php?action=Admin_Produits");
 }

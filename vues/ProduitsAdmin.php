@@ -29,6 +29,7 @@ ob_start();
                     <th>Sexe</th>
                     <th>Type</th>
                     <th>Prix</th>
+                    <th>Date d'ajout</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -53,8 +54,11 @@ ob_start();
                     <td><?= $produit->getPrix() ?> €</td>
 
                     <td>
+                        <?= (new DateTime($produit->getDateAjout()))->format('d/m/Y') ?>
+                    </td>
+                    <td>
                         <a href="index.php?action=Admin_ModifierProduit&id=<?= $produit->getId() ?>"
-                           class="btn btn-sm btn-warning">
+                           class="btn btn-sm btn-warning mt-2 mb-2">
                             Modifier
                         </a>
                         <a href="index.php?action=Admin_SupprimerProduit&id=<?= $produit->getId() ?>"

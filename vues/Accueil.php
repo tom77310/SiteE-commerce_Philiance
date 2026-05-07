@@ -32,6 +32,7 @@ ob_start();
 
             <?php foreach ($nouveautes as $p) : ?>
 
+
                 <div class="col-md-3 mb-3">
                     <div class="card h-100">
 
