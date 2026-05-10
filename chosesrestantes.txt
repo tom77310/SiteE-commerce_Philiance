@@ -68,6 +68,7 @@ Fonctionnalitées pour la (V1) :
 - Rajouter un mode sombre (fait)
 - Trouver un nom au site (fait) => UrbanStyle
 - Changer le logo (fait)
+
 - Sécurité des URL en fonction du role et sécurité générale du site
 - Mettre des commentaires dans le code, reorganiser tous le code, faire les derniers details du site, refaire le trello correctement
 
