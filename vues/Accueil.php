@@ -64,44 +64,8 @@ ob_start();
     <!-- ========================= -->
     <!-- PROMOTIONS -->
     <!-- ========================= -->
-    <h3 class="mb-3">💥 Promotions</h3>
 
-    <div class="row mb-5">
-
-        <?php if (!empty($promotions)) : ?>
-
-            <?php foreach ($promotions as $p) : ?>
-
-                <div class="col-md-3 mb-3">
-                    <div class="card border-danger h-100">
-
-                        <img src="assets/img/produits/<?= $p->getSexe() ?>s/<?= $p->getImage() ?>"
-                             class="card-img-top"
-                             alt="<?= htmlspecialchars($p->getNomProduit()) ?>">
-
-                        <div class="card-body d-flex flex-column">
-                            <h6><?= htmlspecialchars($p->getNomProduit()) ?></h6>
-
-                            <p class="text-danger fw-bold">
-                                <?= $p->getPrix() ?> €
-                            </p>
-
-                            <a href="index.php?action=detail_produit&id=<?= $p->getId() ?>"
-                               class="btn btn-outline-danger mt-auto">
-                                Profiter
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-
-            <?php endforeach; ?>
-
-        <?php else : ?>
-            <p class="text-muted">Aucune promotion disponible.</p>
-        <?php endif; ?>
-
-    </div>
+             <!-- Section promotions a venir en V2 -->
 
     <!-- ========================= -->
     <!-- AVIS -->

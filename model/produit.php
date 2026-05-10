@@ -9,7 +9,6 @@ class Produit{
     private string $type_vetement;
     private string $categorie_vetement;
     private float $prix;
-    private ?float $prixPromo = null;
     private string $image;
     private string $dateAjout;
 
@@ -137,23 +136,6 @@ class Produit{
     {
         $this->prix = $prix;
 
-        return $this;
-    }
-
-    /**
-     * Get the value of prixPromo
-     */
-    public function getPrixPromo(): float
-    {
-        return $this->prixPromo;
-    }
-
-    /**
-     * Set the value of prix
-     */
-    public function setPrixPromo(?float $prixPromo): self
-    {
-        $this->prixPromo = $prixPromo;
         return $this;
     }
 
@@ -373,62 +355,4 @@ function RecupererNouveautes($limite = 4) {
     return $nouveautes;
 }
 
-// Recuperer les produits en promo
-function RecupererProduitsEnPromo($limite = 4)
-{
-    $promotions = [];
 
-    $sqlReq = "SELECT *
-               FROM produit
-               WHERE prixPromo IS NOT NULL
-               AND prixPromo < prix
-               ORDER BY dateAjout DESC
-               LIMIT $limite";
-
-    try {
-
-        $ctxBDD = ConnexionBDD();
-        $req = $ctxBDD->query($sqlReq);
-
-        $req->setFetchMode(PDO::FETCH_CLASS, 'Produit');
-
-        $promotions = $req->fetchAll();
-
-    } catch (Exception $ex) {
-        var_dump($ex->getMessage());
-        die();
-    }
-
-    return $promotions;
-}
-
-// Modifier prix en promo
-function ModifierPrixProduit(int $id, float $prix,  $prixPromo = null)
-{
-    $sqlReq = "UPDATE produit
-               SET prix = :prix,
-                   prixPromo = :prixPromo
-               WHERE id = :id";
-
-    try {
-
-        $ctxBDD = ConnexionBDD();
-        $req = $ctxBDD->prepare($sqlReq);
-
-        $req->bindValue(':id', $id, PDO::PARAM_INT);
-        $req->bindValue(':prix', $prix);
-
-        // si pas de promo → NULL en base
-        if ($prixPromo === null || $prixPromo === '') {
-            $req->bindValue(':prixPromo', null, PDO::PARAM_NULL);
-        } else {
-            $req->bindValue(':prixPromo', $prixPromo);
-        }
-
-        return $req->execute();
-
-    } catch (Exception $ex) {
-        var_dump($ex->getMessage());
-        die();
-    }
-}

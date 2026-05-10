@@ -7,9 +7,7 @@ require_once "model/produit.php";
 
         // Recuperer les nouveaux produits
         $nouveautes = RecupererNouveautes(4);
-
-        // Récupérer les produits en promo
-        $promo = RecupererProduitsEnPromo(4);
+        
         require "vues/Accueil.php";
     }
 ?>
