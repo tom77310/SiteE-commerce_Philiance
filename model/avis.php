@@ -287,3 +287,41 @@ function AvoirAvisParUtilisateur(int $idUtilisateur): array {
     }
     return $avis;
 }
+
+// Récupérer les avis récents dans la page d'accueil
+function RecupererAvisRecents(int $limite = 4): array {
+
+    $avis = [];
+
+    $sqlReq = "SELECT a.*, 
+                      u.pseudo,
+                      p.nom_produit
+               FROM avis a
+               JOIN utilisateurs u 
+                    ON a.id_utilisateur = u.id_utilisateurs
+               JOIN produit p 
+                    ON a.id_produit = p.id_produit
+               ORDER BY a.date DESC
+               LIMIT :limite";
+
+    try {
+
+        $ctxBDD = ConnexionBDD();
+
+        $req = $ctxBDD->prepare($sqlReq);
+
+        $req->bindValue(':limite', $limite, PDO::PARAM_INT);
+
+        $req->execute();
+
+        $avis = $req->fetchAll(PDO::FETCH_ASSOC);
+
+    } catch (Exception $ex) {
+
+        var_dump($ex->getMessage());
+
+    } finally {
+
+        return $avis;
+    }
+}

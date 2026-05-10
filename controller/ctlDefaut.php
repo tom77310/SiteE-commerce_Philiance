@@ -7,7 +7,9 @@ require_once "model/produit.php";
 
         // Recuperer les nouveaux produits
         $nouveautes = RecupererNouveautes(4);
-        
+
+        // Recuperer les avis récents des utilisateurs sur les produits
+        $avisRecents = RecupererAvisRecents();
         require "vues/Accueil.php";
     }
 ?>

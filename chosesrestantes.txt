@@ -51,14 +51,25 @@ Fonctionnalitées pour la (V1) :
         - Limité la date : au bout d'un certain nombre de jours l'article n'est plus considéré comme nouveau, et s'enleve de la section nouveauté de la page d'accueil (fait)
         - Rajouter la posibilité de modifier la date d'ajout d'un produit (fait)
 10/05/2026 (exceptionnel)
-    - Avis récents :
-        - rajouter une méthode pour récupérér les derniers avis des utilisateurs
-- Couleurs de l'interface
-- Rajouter un mode sombre
+    - Avis récents : (fait)
+        - rajouter une méthode pour récupérér les derniers avis des utilisateurs (fait)
+- Couleurs de l'interface : (fait)
+
+    | Élément               | Couleur   |
+    | --------------------- | --------- |
+    | Fond principal        | `#F8F9FA` |
+    | Navbar / footer       | `#212529` |
+    | Texte principal       | `#212529` |
+    | Boutons principaux    | `#0D6EFD` |
+    | Hover boutons         | `#0B5ED7` |
+    | Accent promo / badges | `#DC3545` |
+    | Cartes produits       | `#FFFFFF` |
+
+- Rajouter un mode sombre (fait)
+- Trouver un nom au site (fait) => UrbanStyle
+- Changer le logo (fait)
 - Sécurité des URL en fonction du role et sécurité générale du site
-- Trouver un nom au site
-- Changer le logo
-- Mettre des commentaires dans le code, reorganiser tous le code
+- Mettre des commentaires dans le code, reorganiser tous le code, faire les derniers details du site, refaire le trello correctement
 
 Idée de nouvelles fonctionnalités (V2) :
 - Faire un tri des produits pour les admin
@@ -102,6 +113,7 @@ Idée de nouvelles fonctionnalités (V2) :
         - Formulaire pour les admin
         - Faire en sorte que prixPromo ne puisse pas etre superieur au prix initial
     - Section Produits Populaires
+- Ameliorer les liens dans le footer
 
 Idée Nouvelles fonctionnalités pour une potentiel V3 :
     - Amelioration Section Promo :
@@ -109,3 +121,4 @@ Idée Nouvelles fonctionnalités pour une potentiel V3 :
         - Ajouter un pourcentage pour savoir à combien est la promo sur le produit
         - Ameliorer le formulaire d'admin pour modifier / ajouter la promo sur un produit
         - Afficher date de debut et de fin de la promo
+- Ajouter la section "vente privée" dans la barre de nav reserver aux utilisateurs inscrit et connecter

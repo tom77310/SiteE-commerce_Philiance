@@ -13,12 +13,9 @@ ob_start();
 <div class="container mt-5">
 
     <!-- HERO -->
-    <div class="p-5 mb-4 bg-dark text-white rounded-3 text-center">
-        <h1>Bienvenue sur notre boutique</h1>
+    <div class="hero-section text-white text-center mb-5">
+        <h1>Bienvenue sur notre boutique UrbanStyle</h1>
         <p>Découvrez les dernières tendances, promotions et nouveautés</p>
-        <a href="index.php?action=Produits_Hommes" class="btn btn-light mt-2">
-            Voir les produits
-        </a>
     </div>
 
     <!-- ========================= -->
@@ -83,9 +80,10 @@ ob_start();
 
                         <div class="card-body">
 
+                            <h5><?= htmlspecialchars($a['nom_produit']) ?></h5>
                             <h6><?= htmlspecialchars($a['pseudo']) ?></h6>
 
-                            <p>⭐ <?= $a['note'] ?>/5</p>
+                            <p> <?= $a['note'] ?>/5⭐</p>
 
                             <p><?= nl2br(htmlspecialchars($a['commentaire'])) ?></p>
 
