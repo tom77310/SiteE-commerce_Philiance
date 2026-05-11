@@ -1,19 +1,76 @@
-Fonctionnalitées pour la (V1) :
+Fonctionnalitées pour la V1 du Site E-commerce "UrbanStyle" :
+05/01/26
+- Mise en place de la base de données :
+    - Création de la table "utilisateurs" avec tous les champs necessaires (fait)
+    - Création de la table "produits" avec tous les champs necessaires (fait)
+    - Insertion des images et des infos des produits dans la BDD (fait)
+06/01/26
+- Création des modeles utilisateurs et produits (fait)
+- création du fichier index.php, le routeur (fait)
 
+15/01/26
+- creation du modele commandes (fait)
+- creation de la table et des champs pour la commande (fait)
+- creation d'un fichier de connexion pour la BDD (fait)
+
+16/01/26
+- Mise en place de la barre de navigation (fait)
+
+21/01/26
+- Debut de la page article femmes (fait)
+28/01/26
+- reorganisation des dossiers des images des produits (fait)
+
+31/01/26
+- Mise a jour des noms des images des produits dans les dossiers (fait)
+- mise en place des pages d'articles pour les hommes et les enfants (fait)
+- Mise a jour de l'index et de la barre de navigation (fait)
+- Mise en place des pages de details des produits (fait)
+- Mise en place et affichage du panier  (fait)
+
+02/02/26
+- Finalisation du panier (fait)
+
+06/02/26
+- Espace Utilisateur :
+    - Infos perso (fait)
+    - modifier ses infos persos (fait)
+07/02/26
+    - Suppression du compte (fait)
+    - Ajout de la verif de mot de passe avant la suppression du compte (fait)
+    - Ajout d'une confirmation avant la suppression du compte (fait)
+    - Ajout de la modification du mot de passe (fait)
+- Ajout de 10 utilisateurs dans la BDD (fait)
+- Ajout d'un fichier Excell avec les infos des utilisateurs ajoutés (fait)
+
+25/02/26 et 27/02/26
+- Creation du model DetailCommande (fait)
+- Creation de la table DetailCommande dans la BDD (fait)
+- Resoudre le bug de la modif infos utilisateurs (fait)
+- Ajout d'un fichier avec la liste des taches a faire (fait)
 - mise en place de la commande (fait)
+
+06/03/26
 - détail de commande après validation (fait)
 - historique de commandes (fait)
+
+11/03/26
 - Espace Admin à faire :
-    - Affichage Liste Utilisateur/Produits/Commandes (fait)
     - Ajouter un produit (fait)
     - Dés l'ajout d'un produit, la page se crée seule (fait)
+14/03/26
+    - Affichage Liste Utilisateur/Produits/Commandes (fait)
+16/03/26
     - Modifier et supprimer un produit (fait)
+    - Corriger l'affichage des images dans la page de detail des produits (fait)
+18/03/26
     - Supprimer un utilisateur, supprime automatiquement les commandes associées et leurs détails (fait)
     - Supprimer une commande (fait)
     - Modifier uniquement le role d'un utilisateur (fait)
+20/03/26
 - Mise en place d'un formulaire de contact qui envoie le message vers un mail spécifique (fait)
-- Faire tous le système des avis clients :
 24/04/26
+- Faire tous le système des avis clients :
     - Ajouter un avis (fait)
     - Limiter les avis a 1 par produits et par utilisateurs (fait)
     - Modifier un avis (fait)
@@ -76,7 +133,6 @@ Fonctionnalitées pour la (V1) :
 - reorganiser tous le code (fait)
 - Mettre des commentaires dans le code (fait)
 - faire les derniers details du site (fait)
-- refaire le trello correctement
 
 Idée de nouvelles fonctionnalités (V2) :
 - Faire un tri des produits pour les admin
