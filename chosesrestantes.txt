@@ -50,6 +50,7 @@ Fonctionnalitées pour la (V1) :
         - rajouter une methode qui recupèrent les produit en fonction de la date d'ajout (fait)
         - Limité la date : au bout d'un certain nombre de jours l'article n'est plus considéré comme nouveau, et s'enleve de la section nouveauté de la page d'accueil (fait)
         - Rajouter la posibilité de modifier la date d'ajout d'un produit (fait)
+
 10/05/2026 (exceptionnel)
     - Avis récents : (fait)
         - rajouter une méthode pour récupérér les derniers avis des utilisateurs (fait)
@@ -69,7 +70,9 @@ Fonctionnalitées pour la (V1) :
 - Trouver un nom au site (fait) => UrbanStyle
 - Changer le logo (fait)
 
-- Sécurité des URL en fonction du role et sécurité générale du site
+11/05/2026
+- Sécurité des URL en fonction du role (fait)
+- sécurité générale du site (fait)
 - Mettre des commentaires dans le code, reorganiser tous le code, faire les derniers details du site, refaire le trello correctement
 
 Idée de nouvelles fonctionnalités (V2) :
@@ -115,6 +118,17 @@ Idée de nouvelles fonctionnalités (V2) :
         - Faire en sorte que prixPromo ne puisse pas etre superieur au prix initial
     - Section Produits Populaires
 - Ameliorer les liens dans le footer
+- Amélioration Sécurité :
+    - Sécurisé les requêtes SQL
+    - Sécurisé les sessions
+    - Protection CSRF
+    - Amélioration de la sécurité des rôles coté server
+    - Sécurisé les GET sensibles
+    - Sécurité sur les uploads des images
+    - Mettre en place un log des actions des admin
+    - Limitation de tentative de connexion
+    - expiration des sessions
+    - protaction anti brute force
 
 Idée Nouvelles fonctionnalités pour une potentiel V3 :
     - Amelioration Section Promo :

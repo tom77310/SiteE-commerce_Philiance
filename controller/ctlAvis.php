@@ -79,11 +79,11 @@ function ctlSupprimerAvis() {
         exit();
     }
     $idUser = $_SESSION['user']->getIdUtilisateurs();
-    $role = $_SESSION['user']->getRole();
+    $role = strtoupper($_SESSION['user']->getRole());
 
-    if ($idUser != $avis['id_utilsiateur'] && $role != 'admin') {
-       header("Location: index.php");
-       exit();
+    if ($idUser != $avis['id_utilisateur'] && $role != 'ADMIN') {
+        header("Location: index.php");
+        exit();
     }
 
     $idProduit = $avis['id_produit'];

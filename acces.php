@@ -20,7 +20,6 @@ $ListAcces = [
     'Produits_Enfants'=>[],
     'Produits_Hommes'=>[],
     'detail_produit'=>[],
-    'supprimer_avis'=>['USER'],
     'Produit_Ajout'=>['USER'],
     'Panier'=>['USER'],
     'modifier_quantite'=>['USER'],
@@ -45,12 +44,13 @@ $ListAcces = [
     'ajouter_avis'=>['USER', 'ADMIN'],
     'modifier_avis'=>['USER', 'ADMIN'],
     'update_avis'=>['USER', 'ADMIN'],
-    'supprimer_avis'=>['USER', 'ADMIN'],
+    'supprimer_avis'=>[],
     'mentions_legales'=>[],
     'cgv'=>[],
     'cgu'=>[],
     'confidentialite'=>[],
     'rgpd'=>[],
-    'apropos'=>[]
+    'apropos'=>[],
+    'formcontact' => []
 ]
 ?>

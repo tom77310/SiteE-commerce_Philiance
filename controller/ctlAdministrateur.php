@@ -154,7 +154,7 @@ function ctlAdminUpdateProduit(){
     function ctlAdminSupprimerUtilisateur() {
         $id_utillisateur = $_GET['id'];
         SupprimerUtilisateurParId($id_utillisateur);
-        header("Location: index.php?action=Admin_Utilisateurs");
+        header("Location: index.php?action=Admin_ListeUtilisateurs");
     }
     // Modifier le role d'un utilisateur
     function ctlAdminModifierRoleUtilisateur() {

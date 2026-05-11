@@ -11,6 +11,14 @@ ob_start()
 
                 <h2 class="text-center mb-4">Connexion</h2>
 
+                <?php if (!empty($erreurConnexion)) { ?>
+
+                    <div class="alert alert-danger">
+                        <?= htmlspecialchars($erreurConnexion) ?>
+                    </div>
+
+                <?php } ?>
+                
                 <form action="#" method="POST">
 
                     <div class="mb-3">

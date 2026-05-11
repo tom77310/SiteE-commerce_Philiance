@@ -1,42 +1,79 @@
 <?php
 // Import model
 require_once __DIR__ . '/../model/utilisateurs.php';
+require_once 'vues/securite.php';
 
 // Inscription
 function ctlUtilisateurInscription() {
+
     $ret = false;
-    if(isset($_POST['email'])){
+    $erreurs = [];
+
+    if (isset($_POST['email'])) {
+
+        // Validation mot de passe
+        $validationMdp = MotDePasseValide($_POST['motdepasse']);
+
+        if (!$validationMdp['valide']) {
+
+            $erreurs = $validationMdp['erreurs'];
+
+            require "vues/inscription.php";
+            return;
+        }
+
         $utilisateur = new Utilisateurs();
 
         $utilisateur->setNom(htmlspecialchars($_POST['nom']))
                     ->setPrenom(htmlspecialchars($_POST['prenom']))
-                    ->setPseudo(htmlspecialchars($_POST['pseudo'])) 
-                    ->setTel(htmlspecialchars($_POST['tel'])) 
-                    ->setDateNaissance(htmlspecialchars($_POST['date_naissance'])) 
-                    ->setEmail(htmlspecialchars($_POST['email'])) 
-                    ->setMotdepasse($_POST['motdepasse']) 
-                    ->setRole("USER"); // Role par defaut
+                    ->setPseudo(htmlspecialchars($_POST['pseudo']))
+                    ->setTel(htmlspecialchars($_POST['tel']))
+                    ->setDateNaissance(htmlspecialchars($_POST['date_naissance']))
+                    ->setEmail(htmlspecialchars($_POST['email']))
+                    ->setMotdepasse($_POST['motdepasse'])
+                    ->setRole("USER");
+
         $ret = AjoutUtilisateur($utilisateur);
-        header("location: index.php?action=connexion");
-        exit;
+
+        if ($ret) {
+
+            header("Location: index.php?action=connexion");
+            exit();
+
+        } else {
+
+            $erreurs[] = "Une erreur est survenue lors de l'inscription.";
+        }
     }
+
     require "vues/inscription.php";
 }
 // Connexion
 function ctlUtilisateurConnexion() {
-    if (isset($_POST['email']) && isset($_POST['motdepasse'])){
+
+    $erreurConnexion = "";
+
+    if (isset($_POST['email']) && isset($_POST['motdepasse'])) {
+
         $email = htmlspecialchars($_POST['email']);
         $motdepasse = $_POST['motdepasse'];
 
         $utilisateur = AvoirUtilisateurParSonEmail($email);
-        if($utilisateur){
-            if($utilisateur->checkPasswd($motdepasse)){
+
+        if ($utilisateur) {
+
+            if ($utilisateur->checkPasswd($motdepasse)) {
+
                 $_SESSION['user'] = $utilisateur;
+
+                header("Location: index.php?action=accueil");
+                exit();
             }
         }
-        header("location: index.php?action=accueil");
-        exit; // Toujours le mettre apres location, sinon php continue d'executer le fichier
+
+        $erreurConnexion = "Email ou mot de passe incorrect.";
     }
+
     require "vues/connexion.php";
 }
 // Deconnexion
@@ -185,7 +222,6 @@ function ctlSupprimerCompte() {
     exit();
 }
 
-// Traitement modif mot de passe
 function ctlModifierMotDePasseTraitement() {
 
     // =========================
@@ -197,7 +233,7 @@ function ctlModifierMotDePasseTraitement() {
     }
 
     // =========================
-    // 2️⃣ Sécurité : POST uniquement
+    // 2️⃣ POST uniquement
     // =========================
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         header("Location: index.php?action=utilisateur_compte");
@@ -213,37 +249,65 @@ function ctlModifierMotDePasseTraitement() {
     $nouveau = $_POST['nouveau_mot_de_passe'] ?? '';
     $confirmation = $_POST['confirmation_mot_de_passe'] ?? '';
 
+    $erreurs = [];
+
     // =========================
-    // 4️⃣ Vérifications
+    // 4️⃣ Vérification champs vides
     // =========================
     if (
         empty($ancien) ||
         empty($nouveau) ||
         empty($confirmation)
     ) {
-        header("Location: index.php?action=modifier_mot_de_passe");
-        exit();
-    }
 
-    // Vérifier l’ancien mot de passe
-    if (!password_verify($ancien, $utilisateur->getMotDePasse())) {
-        header("Location: index.php?action=modifier_mot_de_passe");
-        exit();
-    }
-
-    // Vérifier la confirmation
-    if ($nouveau !== $confirmation) {
-        header("Location: index.php?action=modifier_mot_de_passe");
-        exit();
+        $erreurs[] = "Tous les champs sont obligatoires.";
     }
 
     // =========================
-    // 5️⃣ Hash du nouveau mot de passe
+    // 5️⃣ Vérifier ancien mot de passe
+    // =========================
+    if (!password_verify($ancien, $utilisateur->getMotDePasse())) {
+
+        $erreurs[] = "L'ancien mot de passe est incorrect.";
+    }
+
+    // =========================
+    // 6️⃣ Vérifier confirmation
+    // =========================
+    if ($nouveau !== $confirmation) {
+
+        $erreurs[] = "La confirmation du mot de passe est incorrecte.";
+    }
+
+    // =========================
+    // 7️⃣ Validation sécurité mot de passe
+    // =========================
+    $validationMdp = MotDePasseValide($nouveau);
+
+    if (!$validationMdp['valide']) {
+
+        $erreurs = array_merge(
+            $erreurs,
+            $validationMdp['erreurs']
+        );
+    }
+
+    // =========================
+    // 8️⃣ Si erreurs
+    // =========================
+    if (!empty($erreurs)) {
+
+        require "vues/modifierMotDePasse.php";
+        return;
+    }
+
+    // =========================
+    // 9️⃣ Hash du nouveau mot de passe
     // =========================
     $nouveauHash = password_hash($nouveau, PASSWORD_DEFAULT);
 
     // =========================
-    // 6️⃣ Mise à jour en base
+    // 🔟 Mise à jour BDD
     // =========================
     $ok = modifierMotDePasse(
         $utilisateur->getIdUtilisateurs(),
@@ -251,18 +315,24 @@ function ctlModifierMotDePasseTraitement() {
     );
 
     // =========================
-    // 7️⃣ Mise à jour session
+    // 1️⃣1️⃣ Mise à jour session
     // =========================
     if ($ok) {
+
         $utilisateur->setMotDePasse($nouveauHash);
+
         $_SESSION['user'] = $utilisateur;
+
+        header("Location: index.php?action=utilisateur_compte&success=mdp_modifie");
+        exit();
     }
 
     // =========================
-    // 8️⃣ Redirection finale
+    // 1️⃣2️⃣ Erreur BDD
     // =========================
-    header("Location: index.php?action=utilisateur_compte");
-    exit();
+    $erreurs[] = "Une erreur est survenue.";
+
+    require "vues/modifierMotDePasse.php";
 }
 
 

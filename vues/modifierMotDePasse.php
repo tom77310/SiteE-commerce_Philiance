@@ -1,9 +1,27 @@
 <?php
-$titre = "Site e-commerce 2022-2023 : Modifier mon mot de passe";
+$titre = "UrbanStyle : Modifier mon mot de passe";
 ob_start();
 ?>
 
 <h2 class="mb-4">Modifier mon mot de passe</h2>
+
+    <?php if (!empty($erreurs)) { ?>
+
+        <div class="alert alert-danger">
+
+            <ul class="mb-0">
+
+                <?php foreach ($erreurs as $erreur) { ?>
+
+                    <li><?= htmlspecialchars($erreur) ?></li>
+
+                <?php } ?>
+
+            </ul>
+
+        </div>
+
+    <?php } ?>
 
 <form method="post" action="index.php?action=modifier_mot_de_passe_traitement">
 

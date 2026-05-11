@@ -10,6 +10,23 @@ ob_start()
             <div class="card-body p-4">
 
                 <h2 class="text-center mb-4">Créer un compte</h2>
+                <?php if (!empty($erreurs)) { ?>
+
+                    <div class="alert alert-danger">
+
+                        <ul class="mb-0">
+
+                            <?php foreach ($erreurs as $erreur) { ?>
+
+                                <li><?= htmlspecialchars($erreur) ?></li>
+
+                            <?php } ?>
+
+                        </ul>
+
+                    </div>
+
+                <?php } ?>
 
                 <form action="#" method="POST">
 
@@ -47,8 +64,12 @@ ob_start()
 
                     <div class="mb-4">
                         <label for="motdepasse" class="form-label">Mot de passe</label>
-                        <input type="password" class="form-control" id="motdepasse" name="motdepasse" required>
+                        <input type="password" class="form-control" id="motdepasse" name="motdepasse" minlength="8" required>
                     </div>
+                    <small class="text-muted">
+                        Le mot de passe doit contenir au moins :
+                        8 caractères, une majuscule, une minuscule et un chiffre.
+                    </small>
 
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary">
