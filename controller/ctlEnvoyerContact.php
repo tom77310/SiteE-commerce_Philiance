@@ -25,7 +25,7 @@ function ctlEnvoyerContact() {
         $mail->Port = 587;
 
         // Expéditeur
-        $mail->setFrom('lemairetomtom@gmail.com', 'Site E-commerce');
+        $mail->setFrom('lemairetomtom@gmail.com', 'UrbanStyle');
 
         // Destinataire 
         $mail->addAddress('lemairetomtom@gmail.com');
@@ -52,11 +52,4 @@ function ctlEnvoyerContact() {
     }
     exit();
 }
-
-
-
-
-
-
-
 ?>

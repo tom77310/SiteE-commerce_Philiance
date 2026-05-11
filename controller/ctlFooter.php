@@ -1,25 +1,25 @@
 <?php
 
 function ctlMentionsLegales() {
-    require 'vues/MentionsLegales.php';
+    require 'vues/Footer/MentionsLegales.php';
 }
 
 function ctlCGV() {
-    require 'vues/cgv.php';
+    require 'vues/Footer/cgv.php';
 }
 
 function ctlCGU() {
-    require 'vues/cgu.php';
+    require 'vues/Footer/cgu.php';
 }
 
 function ctlConfidentialite() {
-    require 'vues/confidentialite.php';
+    require 'vues/Footer/confidentialite.php';
 }
 
 function ctlRGPD() {
-    require 'vues/rgpd.php';
+    require 'vues/Footer/rgpd.php';
 }
 
 function ctlAPropos() {
-    require 'vues/apropos.php';
+    require 'vues/Footer/apropos.php';
 }

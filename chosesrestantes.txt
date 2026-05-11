@@ -73,7 +73,10 @@ Fonctionnalitées pour la (V1) :
 11/05/2026
 - Sécurité des URL en fonction du role (fait)
 - sécurité générale du site (fait)
-- Mettre des commentaires dans le code, reorganiser tous le code, faire les derniers details du site, refaire le trello correctement
+- reorganiser tous le code (fait)
+- Mettre des commentaires dans le code (fait)
+- faire les derniers details du site (fait)
+- refaire le trello correctement
 
 Idée de nouvelles fonctionnalités (V2) :
 - Faire un tri des produits pour les admin
@@ -104,7 +107,7 @@ Idée de nouvelles fonctionnalités (V2) :
     - Garçon
     - Bébé
 - Faire en sorte qu'on puisse annulé une commande dans l'historique de commande
-- Faire en sorte de msquer/afficher le mot de passe dans les formulaires inscription/connexion
+- Faire en sorte de masquer/afficher le mot de passe dans les formulaires inscription/connexion
 - Ajouter un champs de comfirmation de mdp dans les formulaires de connexion/inscription
 - Checkbox RGPD dans les formulaires inscription/connexion
 - Amelioration Page d'accueil
@@ -129,6 +132,11 @@ Idée de nouvelles fonctionnalités (V2) :
     - Limitation de tentative de connexion
     - expiration des sessions
     - protaction anti brute force
+- Amelioration des pages produits
+- Faire en sorte que la date d'ajout dans la modif produit, reste a la date ajouter
+- limiter le champ du telephone a 10 caractères max
+- Mettre le tableau de gestion (commandes, produits, avis et utilisateurs), en fond noir lorsque le mode sombre est activé
+
 
 Idée Nouvelles fonctionnalités pour une potentiel V3 :
     - Amelioration Section Promo :

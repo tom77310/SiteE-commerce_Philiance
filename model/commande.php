@@ -3,6 +3,7 @@
 require_once "model/ConnexionBDD.php";
 
 class Commande {
+
     private int $id_commande;
     private string $reference;
     private float $montant;
@@ -102,60 +103,76 @@ class Commande {
 
 // Création d'une commande 
 function creationCommande(Commande $commande): int {
+
     $ret = false;
     $dernierId = 0;
 
-    $sqlReq = "INSERT INTO commande (reference, montant, date, id_utilisateur)";
-    $sqlReq .= " VALUES(:reference, :montant, :date, :utilisateur)";
+    $sqlReq = "INSERT INTO commande 
+               (reference, montant, date, id_utilisateur)
+               VALUES(:reference, :montant, :date, :utilisateur)";
 
     try {
-        $ctxBDD =  ConnexionBDD();
+
+        $ctxBDD = ConnexionBDD();
+
         $req = $ctxBDD->prepare($sqlReq);
+
         $req->bindValue(':reference', $commande->getReference(), PDO::PARAM_STR);
         $req->bindValue(':montant', $commande->getMontant());
         $req->bindValue(':date', $commande->getDate()->format("Y-m-d H:i:s"));
         $req->bindValue(':utilisateur', $commande->getIdUtilisateur());
 
         $ret = $req->execute();
+
+        // Récupération de l'id de la commande créée
         if ($ret) {
             $dernierId = intval($ctxBDD->lastInsertId());
         }
-    }
-    catch (Exception $ex) {
+
+    } catch (Exception $ex) {
+
         var_dump($ex->getMessage());
-    }
-    finally {
-        // id de la commande que l'on vient de créer
+
+    } finally {
+
+        // Retourne l'id de la commande créée
         return $dernierId;
     }
 }
 
 // Nombre de commande
 function NbCommandes(): int {
+
     $nbcommande = 0;
 
     $sqlReq = "SELECT COUNT(*) as nb_commandes FROM commande";
 
     try {
-        $ctxBDD =  ConnexionBDD();
+
+        $ctxBDD = ConnexionBDD();
+
         $req = $ctxBDD->query($sqlReq);
+
         $retNb = $req->fetch();
 
-        if(!$retNb) {
+        if (!$retNb) {
+
             $nbcommande = 0;
+
         }
         else {
+
             $nbcommande = $retNb['nb_commandes'];
         }
 
-    }
-    catch (Exception $ex){
+    } catch (Exception $ex) {
+
         var_dump($ex->getMessage());
-    }
-    finally {
+
+    } finally {
+
         return $nbcommande;
     }
-
 }
 
 // Récupérer une commande par son id
@@ -164,18 +181,25 @@ function RecupererUneCommandeParId(int $idCommande) {
     $sqlReq = "SELECT * FROM commande WHERE id_commande = :id_commande";
 
     try {
+
         $ctxBDD = ConnexionBDD();
+
         $req = $ctxBDD->prepare($sqlReq);
+
         $req->bindValue(':id_commande', $idCommande, PDO::PARAM_INT);
+
         $req->execute();
 
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
+        // Vérifie que la commande existe
         if (!$data) {
             return null;
         }
 
+        // Création de l'objet commande
         $commande = new Commande();
+
         $commande->setIdCommande($data['id_commande']);
         $commande->setReference($data['reference']);
         $commande->setMontant($data['montant']);
@@ -185,74 +209,115 @@ function RecupererUneCommandeParId(int $idCommande) {
         return $commande;
 
     } catch (Exception $ex) {
+
         var_dump($ex->getMessage());
+
         return null;
     }
 }
 
 // Récupérer toutes les commandes d'un utilisateur
 function RecupererCommandeParUtilisateur(int $idUtilisateur): array {
+
     $commandes = [];
 
-    $sqlReq = "SELECT * FROM commande WHERE id_utilisateur = :id_utilisateur ORDER BY date DESC"; // On récupère les commandes et on les tri de la plus récente 
-                                                                                                 // a la plus ancienne
+    // On récupère les commandes triées de la plus récente à la plus ancienne
+    $sqlReq = "SELECT * 
+               FROM commande 
+               WHERE id_utilisateur = :id_utilisateur 
+               ORDER BY date DESC";
+
     try {
+
         $ctxBDD = ConnexionBDD();
+
         $req = $ctxBDD->prepare($sqlReq);
 
         $req->bindValue(':id_utilisateur', $idUtilisateur, PDO::PARAM_INT);
+
         $req->execute();
 
-        $dateCommandes = $req->fetchAll(PDO::FETCH_ASSOC); // récupère d'abord en tableau associatif
+        // Récupération des données sous forme de tableau associatif
+        $dateCommandes = $req->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($dateCommandes as $date) {
+
             $commande = new Commande();
+
             $commande->setIdCommande($date['id_commande']);
             $commande->setReference($date['reference']);
             $commande->setMontant($date['montant']);
-            $commande->setDate(new DateTime($date['date'])); // transforme la string en DateTime
+
+            // Transformation de la date string en objet DateTime
+            $commande->setDate(new DateTime($date['date']));
+
             $commande->setIdUtilisateur($date['id_utilisateur']);
 
             $commandes[] = $commande;
         }
 
     } catch (Exception $ex) {
+
         var_dump($ex->getMessage());
     }
     
     return $commandes;
-    
 }
 
 // Fonction pour récupèrer toutes les commandes
 function ToutesLesCommandes(): array {
+
     $commandes = [];
-    $sqlReq = "SELECT c.id_commande, c.reference, c.montant, c.date, u.nom,u.prenom, u.pseudo
-                FROM commande c JOIN utilisateurs u
-                ON c.id_utilisateur = u.id_utilisateurs ORDER BY c.date DESC";
+
+    $sqlReq = "SELECT c.id_commande,
+                      c.reference,
+                      c.montant,
+                      c.date,
+                      u.nom,
+                      u.prenom,
+                      u.pseudo
+               FROM commande c
+               JOIN utilisateurs u
+                    ON c.id_utilisateur = u.id_utilisateurs
+               ORDER BY c.date DESC";
     
     try {
+
         $ctxBDD = ConnexionBDD();
+
         $req = $ctxBDD->query($sqlReq);
+
         $commandes = $req->fetchAll(PDO::FETCH_ASSOC);
+
     } catch (Exception $ex) {
+
         var_dump($ex->getMessage());
     }
+
     return $commandes;
 }
 
 // Supprimer une commande par son id
-function SupprimerCommandeParId(int $idCommande):bool {
+function SupprimerCommandeParId(int $idCommande): bool {
+
     $ret = false;
+
     $sqlReq = "DELETE FROM commande WHERE id_commande = :id_commande";
 
     try {
+
         $ctxBDD = ConnexionBDD();
+
         $req = $ctxBDD->prepare($sqlReq);
+
         $req->bindValue(':id_commande', $idCommande, PDO::PARAM_INT);
+
         $ret = $req->execute();
+
     } catch (Exception $ex) {
+
         var_dump($ex->getMessage());
     }
+
     return $ret;
 }

@@ -10,6 +10,6 @@ require_once "model/produit.php";
 
         // Recuperer les avis récents des utilisateurs sur les produits
         $avisRecents = RecupererAvisRecents();
-        require "vues/Accueil.php";
+        require "vues/Defaut/Accueil.php";
     }
 ?>

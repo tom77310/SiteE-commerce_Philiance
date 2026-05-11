@@ -7,6 +7,7 @@ require_once "model/detailCommande.php";
 // Espace Admin
 function ctlEspaceAdmin() {
 
+    // Récupération des données pour les statistiques
     $produits = TouslesProduits();
     $utilisateurs = TousLesUtilisateurs();
     
@@ -14,22 +15,24 @@ function ctlEspaceAdmin() {
     $nbUtilisateurs = count($utilisateurs);
     $nbCommandes = NbCommandes();
 
-    require "vues/EspaceAdmin.php";
+    require "vues/Admin/EspaceAdmin.php";
 }
 
 // Page Gestion des produits
 function ctlAdminProduits(){
     $produits = TouslesProduits();
-    require "vues/ProduitsAdmin.php";
+    require "vues/Admin/ProduitsAdmin.php";
 }
 
 // Formulaire d'ajout de produits
 function ctlAdminAjoutProduit(){
-    require "vues/AjouterProduitAdmin.php";
+    require "vues/Admin/AjouterProduitAdmin.php";
 }
 
 // Traitement de l'enregistrement du produit
 function ctlAdminEnregistrementProduit(){
+
+    // Récupération des données du formulaire
     $nom = $_POST['nom_produit'];
     $taille = $_POST['taille'];
     $sexe = $_POST['sexe'];
@@ -53,7 +56,6 @@ function ctlAdminEnregistrementProduit(){
     }
 
     // Upload Image
-
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         
         // Renommer les images pour éviter les doublons
@@ -66,7 +68,6 @@ function ctlAdminEnregistrementProduit(){
     }
 
     // création objet produit
-
     $produit = new Produit();
 
     $produit->setNomProduit($nom);
@@ -78,7 +79,6 @@ function ctlAdminEnregistrementProduit(){
     $produit->setImage($imageNom);
 
     // Insertion BDD
-
     AjoutProduit($produit);
 
     // Redirection
@@ -87,22 +87,32 @@ function ctlAdminEnregistrementProduit(){
 
 // Supprimer un produit
 function ctlAdminSupprimerProduit() {
+
     $id = $_GET['id'];
+
+    // Suppression du produit en base de données
     SupprimerProduit($id);
+
     header("Location: index.php?action=Admin_Produits");
 }
 
 // Modification d'un produit
 function ctlAdminModifierProduit() {
+
     $id = $_GET['id'];
+
+    // Récupération du produit à modifier
     $produit = AvoirUnProduitParSonId($id);
-    require "vues/ModifierProduitAdmin.php";
+
+    require "vues/Admin/ModifierProduitAdmin.php";
 }
 
 // Enregistrement de la modification d'un produit
 function ctlAdminUpdateProduit(){
+
     $id = $_POST['id'];
 
+    // Récupération des nouvelles données
     $nom = $_POST['nom_produit'];
     $taille = $_POST['taille'];
     $sexe = $_POST['sexe'];
@@ -111,8 +121,10 @@ function ctlAdminUpdateProduit(){
     $prix = $_POST['prix'];
     $dateAjout = $_POST['dateAjout'];
 
+    // On garde l'ancienne image par défaut
     $imageNom = $_POST['ancienne_image'];
 
+    // Définition du dossier selon le sexe
     $dossier = "assets/img/produits/";
 
     if ($sexe == "homme") {
@@ -120,45 +132,70 @@ function ctlAdminUpdateProduit(){
     }
     elseif ($sexe == "femme") {
         $dossier .= "femmes/";
-    }else {
+    }
+    else {
         $dossier .= "enfants/";
     }
 
     // Si nouvelle image
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+
         // Alors on supprime l'image actuelle
         if (file_exists($dossier.$imageNom)) {
             unlink($dossier.$imageNom);
         }
+
         // On lui donne un nouveau nom
         $imageNom = uniqid(). "_" .basename($_FILES['image']['name']);
 
+        // Upload de la nouvelle image
         move_uploaded_file(
             $_FILES['image']['tmp_name'],
             $dossier.$imageNom
         );
     }
 
-    ModifierProduit($id, $nom, $taille, $sexe, $type, $categorie, $prix, $imageNom, $dateAjout );
+    // Mise à jour du produit en base de données
+    ModifierProduit(
+        $id,
+        $nom,
+        $taille,
+        $sexe,
+        $type,
+        $categorie,
+        $prix,
+        $imageNom,
+        $dateAjout
+    );
 
     header("Location: index.php?action=Admin_Produits");
 }
 
 // Utilisateurs
+
     // Affichage de la liste des utilisateurs du site
     function ctlAdminUtilisateurs() {
+
         $utilisateurs = TousLesUtilisateurs();
-        require "vues/UtilisateursAdmin.php";
+
+        require "vues/Admin/UtilisateursAdmin.php";
     }
+
     // Supprimer un utilisateur
     function ctlAdminSupprimerUtilisateur() {
+
         $id_utillisateur = $_GET['id'];
+
         SupprimerUtilisateurParId($id_utillisateur);
+
         header("Location: index.php?action=Admin_ListeUtilisateurs");
     }
+
     // Modifier le role d'un utilisateur
     function ctlAdminModifierRoleUtilisateur() {
+
         if (isset($_GET['id']) && isset($_GET['role'])) {
+
             $id = intval($_GET['id']);
             $role = $_GET['role'];
 
@@ -171,21 +208,29 @@ function ctlAdminUpdateProduit(){
             if ($role !== 'ADMIN' && $role !== 'USER') {
                 die("Rôle invalide");
             }
+
             ModifierRoleUtilisateur($id, $role);
         }
+
         header("Location: index.php?action=Admin_ListeUtilisateurs");
         exit();
     }
 
 // Commandes
+
     // Affichage de la liste de toutes les commandes du site
     function ctlAdminCommandes() {
+
         $commandes = ToutesLesCommandes();
-        require "vues/ListeCommandesAdmin.php";
+
+        require "vues/Admin/ListeCommandesAdmin.php";
     }
+
     // Supprimer une commande 
     function ctlAdminSupprimerCommande() {
+
         if (isset($_GET['id'])) {
+
             $idCommande = intval($_GET['id']);
 
             // Supprime tous les détails de la commande

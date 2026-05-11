@@ -1,0 +1,78 @@
+<?php
+$titre = "UrbanStyle: Mon compte";
+ob_start();
+
+/** @var Utilisateurs $utilisateur */ // Evite l'erreur visuel de VSCode sur les variables
+?>
+
+<h1 class="text-center text-decoration-underline mt-3 mb-4">Mon espace utilisateur</h1>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">
+            Bonjour <?= htmlspecialchars($utilisateur->getPrenom()) ?>
+        </h5>
+        <p class="card-text">
+            Email : <?= htmlspecialchars($utilisateur->getEmail()) ?>
+        </p>
+    </div>
+</div>
+
+<div class="row g-3">
+
+    <div class="col-md-6">
+        <a href="index.php?action=utilisateur_infos" class="btn btn-outline-primary w-100">
+            👤 Voir mes informations
+        </a>
+    </div>
+
+    <div class="col-md-6">
+        <a href="index.php?action=utilisateur_modifier_compte" class="btn btn-outline-secondary w-100">
+            ✏️ Modifier mes informations
+        </a>
+    </div>
+
+    <div class="col-md-6">
+        <a href="index.php?action=Commande_historique_utilisateur" class="btn btn-outline-success w-100">
+            📦 Historique des commandes
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a href="index.php?action=utilisateur_mes_avis" class="btn btn-outline-info w-100">
+            ⭐ Mes Avis 
+        </a>
+    </div>
+    <form method="post" action="index.php?action=utilisateur_supprimer_compte" class="mt-4">
+
+        <div class="mb-3">
+            <label class="form-label">Confirmer votre mot de passe</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-danger"
+            onclick="return confirm('Voulez-vous vraiment supprimer votre compte ?');">
+            Supprimer mon compte
+        </button>
+
+    </form>
+
+<div class="card mt-4">
+    <div class="card-body">
+        <h5 class="card-title">Sécurité du compte</h5>
+        <p class="card-text">
+            Vous pouvez modifier votre mot de passe à tout moment.
+        </p>
+
+        <a href="index.php?action=utilisateur_modifier_mot_de_passe"
+           class="btn btn-warning">
+            Modifier mon mot de passe
+        </a>
+    </div>
+</div>
+
+</div>
+
+<?php
+$contenu = ob_get_clean();
+require "vues/template.php";
+?>

@@ -47,61 +47,45 @@ if (isset($_GET['action'])) {
                 ctlUtilisateurDeconnexion();
                 break;
             // Compte Utilisateur
-            case 'utilisateur_compte':
-                
-                ctlCompteUtilisateur();
-                
+            case 'utilisateur_compte':                
+                ctlCompteUtilisateur();                
                 break;
-            case 'utilisateur_infos':
-                
-                ctlInfoUtilisateur();
-                
+            // Infos Utilisateur
+            case 'utilisateur_infos':                
+                ctlInfoUtilisateur();                
                 break;
-            case 'modifier_compte':
-                
-                ctlModifierCompte();
-                
-                break;
-            case 'modifier_compte_traitement':
-                
-                ctlModifierCompteTraitement();
-                
-                break;
-            case 'supprimer_compte':
-                
-                ctlSupprimerCompte();
-                
+            // Modifier le compte utilisateur
+                case 'utilisateur_modifier_compte':                
+                    ctlModifierCompte();                
+                    break;
+                case 'utilisateur_modifier_compte_traitement':                
+                    ctlModifierCompteTraitement();                
+                    break;
+            // Supprimer le compte
+            case 'utilisateur_supprimer_compte':                
+                ctlSupprimerCompte();                
                 break;
             // Mot de passe
-            case 'modifier_mot_de_passe':
+            case 'utilisateur_modifier_mot_de_passe':                
+                ctlModifierMotDePasse();            
+                break;
                 
-            ctlModifierMotDePasse();
-            
-            break;
-            
-            case 'modifier_mot_de_passe_traitement':
-                
-                ctlModifierMotDePasseTraitement();
-                
+                case 'utilisateur_modifier_mot_de_passe_traitement':                
+                    ctlModifierMotDePasseTraitement();                
+                    break;
+                    
+            // Page "Mes avis"
+            case 'utilisateur_mes_avis':                
+                ctlMesAvis();                
                 break;
             // Afficher le Formulaire de contact
-            case 'formulaire_contact':
-                
-            require 'vues/formulairecontact.php';
-            
+            case 'formulaire_contact':                
+            require 'vues/Defaut/formulairecontact.php';            
             break;
             // Envoie du formulaire
-            case 'envoyer_contact':
-                
-            ctlEnvoyerContact();
-            
+            case 'envoyer_contact':                
+            ctlEnvoyerContact();            
             break;
-            // Page "Mes avis"
-            case 'mes_avis':
-                
-                ctlMesAvis();
-                
-                break;
         // Produits
             // Produits Femmes
                 case 'Produits_Femmes':
@@ -116,178 +100,132 @@ if (isset($_GET['action'])) {
                 ctlModeEnfants();
                 break;
             // Detail des produits en fonction de l'id
-                case 'detail_produit':
-                    
-                ctlDetailProduit();
-                
+                case 'detail_produit':                    
+                ctlDetailProduit();                
                 break;
         // Panier
-            // Ajout Panier
-            case 'Produit_Ajout':
-                
-            ctlAjouterPanier();
-            
-            break;
             // Affichage Panier
-            case 'Panier':
-                
-            ctlAfficherPanier();
-            
+            case 'Panier':                
+            ctlAfficherPanier();            
+            break;
+            // Ajout Panier
+            case 'Panier_ajoutProduit':                
+            ctlAjouterPanier();            
             break;
             // Modifier quantité panier
-            case 'modifier_quantite':
-                
-            ctlModifierQuantite();
-            
+            case 'Panier_modifier_quantite':                
+            ctlModifierQuantite();            
             break;
             // Supprimer un produit du panier
-            case 'supprimer_ligne_panier':
-                
-            ctlSupprimerLignePanier();
-            
+            case 'Panier_supprimer_ligne_panier':                
+            ctlSupprimerLignePanier();            
             break;
             // Vider panier
-            case 'vider_panier':
-                
-            ctlViderPanier();
-            
+            case 'Panier_vider_panier':                
+            ctlViderPanier();            
             break;
             // Valider panier
-            case 'valider_panier':
-                
-            ctlValiderPanier();
-            
+            case 'Panier_valider_panier':                
+            ctlValiderPanier();            
             break;
         // Commande
-            case 'recap_commande':
-                
-            ctlRecapCommande();
-            
+            // Recap de la commande
+            case 'Commande_recap':
+            ctlRecapCommande();            
             break;
-            case 'historique_commandes':
-                
-            ctlHistoriqueCommandesUtilisateurs();
-            
+            // Historique de commandes
+            case 'Commande_historique_utilisateur':
+            ctlHistoriqueCommandesUtilisateurs();            
+            break;
+            // Supprimer une commande dans l'historique de commande
+            case 'utilisateur_supprimer_commande':                    
+            ctlSupprimerCommandeUtilisateur();
             break;
         // Administrateur
             // Espace Admin
-            case 'Admin_EspaceAdmin':
-                
-            ctlEspaceAdmin();
-            
+            case 'Admin_EspaceAdmin':                
+            ctlEspaceAdmin();            
             break;
             // Gestion des produits
                 // Liste des Produits
                     case 'Admin_Produits':
-                        
-                    ctlAdminProduits();
-                    
+                    ctlAdminProduits();                    
                     break;
                 // Ajout d'un produit
-                case 'Admin_AjouterProduit':
-                    
-                ctlAdminAjoutProduit();
-                
+                case 'Admin_AjouterProduit':                    
+                ctlAdminAjoutProduit();                
                 break;
                 // Enregistrement Produit avec image
-                case 'Admin_EnregistrementProduit':
-                    
-                ctlAdminEnregistrementProduit();
-                
+                case 'Admin_EnregistrementProduit':                    
+                ctlAdminEnregistrementProduit();                
                 break;
                 // Modifier un produit
-                case 'Admin_ModifierProduit':
-                    
-                ctlAdminModifierProduit();
-                
+                case 'Admin_ModifierProduit':                    
+                ctlAdminModifierProduit();                
                 break;
                 // Enregistrer Modification Produit
-                case 'Admin_UpdateProduit':
-                    
-                ctlAdminUpdateProduit();
-                
+                case 'Admin_UpdateProduit':                    
+                ctlAdminUpdateProduit();                
                 break;
                 // Supprimer Produit
-                case 'Admin_SupprimerProduit':
-                    
-                ctlAdminSupprimerProduit();
-                
+                case 'Admin_SupprimerProduit':                    
+                ctlAdminSupprimerProduit();                
                 break;
             // Gestion des Utilisateurs
                 // Liste des utilisateurs
-                case 'Admin_ListeUtilisateurs':
-                    
-                ctlAdminUtilisateurs();
-                
+                case 'Admin_ListeUtilisateurs':                    
+                ctlAdminUtilisateurs();                
                 break;
                 // Supprimer un utilisateur
-                case 'Admin_SupprimerUtilisateur':
-                    
-                    ctlAdminSupprimerUtilisateur();
-                    
+                case 'Admin_SupprimerUtilisateur':                    
+                    ctlAdminSupprimerUtilisateur();                    
                     break;
                 // Modifier Role Utilisateur
-                case 'Admin_ModifierRoleUtilisateur':
-                    
-                    ctlAdminModifierRoleUtilisateur();
-                    
+                case 'Admin_ModifierRoleUtilisateur':                    
+                    ctlAdminModifierRoleUtilisateur();                    
                     break;
             // Gestion des Commandes des utilisateurs
                 // Liste des commandes
-                case 'Admin_ListeCommandes':
-                    
-                ctlAdminCommandes();
-                
+                case 'Admin_ListeCommandes':                    
+                ctlAdminCommandes();                
                 break;
                 // Supprimer une commande (coter admin)
-                case 'Admin_SupprimerCommande':
-                    
-                ctlAdminSupprimerCommande();
-                
-                break;
-                // Supprimer une commande dans l'historique de commande (coter user)
-                case 'supprimer_commande':
-                    
-                ctlSupprimerCommandeUtilisateur();
-                
+                case 'Admin_SupprimerCommande':                    
+                ctlAdminSupprimerCommande();      
                 break;
             // Avis
-                case 'ajouter_avis':
-                    
-                    ctlAjouterAvis();
-                    
+                // Ajouter un avis
+                case 'Avis_Ajout':                    
+                    ctlAjouterAvis();                    
                     break;
-                case 'modifier_avis':
-                    
-                    ctlModifierAvis();
-                    
-                    break;
-                case 'update_avis':
-                    
-                    ctlUpdateAvis();
-                    
-                    break;
-                case 'supprimer_avis':
-                    
-                    ctlSupprimerAvis();
-                    break;
+                // Modifier un avis
+                    case 'Avis_modifieravis':                   
+                        ctlModifierAvis();                    
+                        break;
+                    case 'Avis_update':                    
+                        ctlUpdateAvis();                    
+                        break;
+                // Supprimer un avis
+                case 'Avis_supprimeravis':                    
+                ctlSupprimerAvis();
+                break;
             // Footer
-                case 'mentions_legales':
+                case 'Footer_mentions_legales':
                 ctlMentionsLegales();
                 break;
-                case 'cgv':
+                case 'Footer_cgv':
                 ctlCGV();
                 break;
-                case 'cgu':
+                case 'Footer_cgu':
                 ctlCGU();
                 break;
-                case 'confidentialite':
+                case 'Footer_confidentialite':
                 ctlConfidentialite();
                 break;
-                case 'rgpd':
+                case 'Footer_rgpd':
                 ctlRGPD();
                 break;
-                case 'apropos':
+                case 'Footer_apropos':
                 ctlAPropos();
                 break;
         default:

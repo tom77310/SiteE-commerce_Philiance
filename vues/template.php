@@ -1,3 +1,7 @@
+<?php
+/** @var string $titre */
+/** @var string $contenu */
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -14,16 +18,15 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-
-    <?php require_once "vues/nav.php"; ?>
-
+    <?php require_once "vues/Defaut/nav.php"; ?>
+    
     <main class="flex-grow-1">
         <div class="container">
             <?= $contenu ?>
         </div>
     </main>
 
-    <?php require_once "vues/footer.php"; ?>
+    <?php require_once "vues/Footer/footer.php"; ?>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
